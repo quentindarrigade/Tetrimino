@@ -1,2 +1,7 @@
 .project
 .classpath
+dao/target/
+
+model/target/
+
+test/target/
