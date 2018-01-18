@@ -1,5 +1,10 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="model_tetrimino")
 public class ModelTetrimino {
 	
 	private int id;
