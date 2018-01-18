@@ -2,19 +2,25 @@ package config;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource({ "classpath:data-source.properties" })
-@ComponentScan({ "DAO" })
 @EnableTransactionManagement
-@EnableJpaRepositories("DAO")
+@EnableJpaRepositories("dao")
 public class AppConfig {
 	
 	@Autowired
@@ -37,7 +43,7 @@ public class AppConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("fr.formation.eshop");
+		emf.setPackagesToScan("dao");
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
