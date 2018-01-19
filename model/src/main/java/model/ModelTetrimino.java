@@ -39,6 +39,8 @@ public class ModelTetrimino implements Serializable{
 	@OneToMany(mappedBy="coup")
 	private List<ModelCoup> coups;
 	
+	
+	
 //	@Column(name="TETRI_COMPO")
 //	private String compo;
 //	
@@ -49,6 +51,22 @@ public class ModelTetrimino implements Serializable{
 //	public void setCompo(String compo) {
 //		this.compo = compo;
 //	}
+
+	public ModelAdmin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(ModelAdmin admin) {
+		this.admin = admin;
+	}
+
+	public List<ModelCoup> getCoups() {
+		return coups;
+	}
+
+	public void setCoups(List<ModelCoup> coups) {
+		this.coups = coups;
+	}
 
 	public int getTaille() {
 		return taille;
