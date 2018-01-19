@@ -36,7 +36,7 @@ public class ModelTetrimino implements Serializable{
 	@JoinColumn(name="TETRI_ADMIN_ID")
 	private ModelAdmin admin;
 	
-	@OneToMany(mappedBy="coup")
+	@OneToMany(mappedBy="piece")
 	private List<ModelCoup> coups;
 	
 	
