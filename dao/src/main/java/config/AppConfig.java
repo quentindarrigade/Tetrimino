@@ -18,6 +18,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
+
 @Configuration
 @PropertySource({ "classpath:data-source.properties" })
 @EnableTransactionManagement
@@ -61,7 +63,7 @@ public class AppConfig {
 		properties.setProperty("hibernate.cachehibernate.cache.use_query_cache", "true");
 		properties.setProperty("hibernate.cache.use_second_level_cache", "true");
 		properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
-		//<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory" />
+		
 		return properties;
 	}
 
