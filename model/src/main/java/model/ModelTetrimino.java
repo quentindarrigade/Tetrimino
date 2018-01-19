@@ -1,15 +1,32 @@
 package model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="model_tetrimino")
-public class ModelTetrimino {
+public class ModelTetrimino implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="TETRI_ID")
 	private int id;
+	
+	
+	@Column(name="TETRI_NOM")
 	private String nom;
+	
+	@Column(name="TETRI_COULEUR")
 	private String couleur;
+	
+	@Column(name="TETRI_TAILLE")
+	private String taille;
 	
 	public void ModelTetrimino() {
 		
