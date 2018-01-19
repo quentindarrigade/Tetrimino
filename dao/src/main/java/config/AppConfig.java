@@ -5,11 +5,12 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.hibernate.cfg.Environment;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -43,7 +44,7 @@ public class AppConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("dao");
+		emf.setPackagesToScan("");
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setJpaVendorAdapter(vendorAdapter);
 		emf.setJpaProperties(this.hibernateProperties());
