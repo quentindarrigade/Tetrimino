@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="coup")
-public class ModelCoup {
+public class ModelCoup implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,7 +32,38 @@ public class ModelCoup {
 	@JoinColumn(name="COUP_PARTIE_ID")
 	private ModelPartie partie;
 
-	@ManyToOne
-	@JoinColumn(name="COU_ADM_ID")
-	private ModelAdmin admin;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public ModelTetrimino getPiece() {
+		return piece;
+	}
+
+	public void setPiece(ModelTetrimino piece) {
+		this.piece = piece;
+	}
+
+	public ModelJoueur getJoueur() {
+		return joueur;
+	}
+
+	public void setJoueur(ModelJoueur joueur) {
+		this.joueur = joueur;
+	}
+
+	public ModelPartie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(ModelPartie partie) {
+		this.partie = partie;
+	}
+
+	
 }
