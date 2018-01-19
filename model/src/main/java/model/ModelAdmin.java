@@ -12,6 +12,14 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "ADM_ID", referencedColumnName = "UTI_ID")
 public class ModelAdmin extends ModelUtilisateur {
 
-	@OneToMany(mappedBy="admin")
-	private List<ModelTetrimino>tetrimino;
+	@OneToMany(mappedBy = "admin")
+	private List<ModelTetrimino> tetrimino;
+
+	@OneToMany(mappedBy = "admin")
+	private List<ModelFAQ> faq;
+
+	public ModelAdmin() {
+		super();
+	}
+
 }
