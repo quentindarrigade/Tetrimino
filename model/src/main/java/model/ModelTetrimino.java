@@ -1,12 +1,16 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,8 +30,36 @@ public class ModelTetrimino implements Serializable{
 	private String couleur;
 	
 	@Column(name="TETRI_TAILLE")
-	private String taille;
+	private int taille;
 	
+	@ManyToOne
+	@JoinColumn(name="TETRI_ADMIN_ID")
+	private ModelAdmin admin;
+	
+	@OneToMany(mappedBy="coup")
+	private List<ModelCoup> coups;
+	
+//	@Column(name="TETRI_COMPO")
+//	private String compo;
+//	
+//	public String getCompo() {
+//		return compo;
+//	}
+//
+//	public void setCompo(String compo) {
+//		this.compo = compo;
+//	}
+
+	public int getTaille() {
+		return taille;
+	}
+
+	public void setTaille(int taille) {
+		this.taille =taille;
+	}
+	
+	
+
 	public void ModelTetrimino() {
 		
 	}
