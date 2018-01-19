@@ -22,7 +22,7 @@ public class ModelPartie implements Serializable {
 	@Column(name="PARTIE_ID")
 	private int id;
 	
-	@OneToMany(mappedBy="coups")
+	@OneToMany(mappedBy="partie")
 	private List<ModelCoup> coups;
 	
 	@ManyToOne
