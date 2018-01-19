@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
-@Inheritance //(strategy = InheritanceType.JOINED)
+@Inheritance (strategy = InheritanceType.JOINED)
 public class ModelUtilisateur implements Serializable  {
 
 	@Id
