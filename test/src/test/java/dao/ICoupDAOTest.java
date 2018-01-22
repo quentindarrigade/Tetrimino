@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
+import model.ModelCoup;
 import model.ModelFAQ;
 
 
@@ -28,12 +29,10 @@ import model.ModelFAQ;
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
 @Rollback(true)
-public class IFAQDAOTest {
+public class ICoupDAOTest {
 	
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
-	private IFAQDAO ifd;
-	@Autowired(required=false)
-	private IAdminDAO iad;
+	private ICoupDAO icd;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -41,34 +40,30 @@ public class IFAQDAOTest {
 	}
 
 	@Test
-	public void testBeanIFAQDAO() {
-		assertNotNull(ifd);
+	public void testBeanICoupDAO() {
+		assertNotNull(icd);
 		
 	}
 	
 	@Test
-	public void testAjouterFAQ() {
-		ModelFAQ a = new ModelFAQ();
-		a.setQuestions("Où se trouve l'oiseau?");
-		a.setReponses("Oui");
-		assertNotNull(iad);
-		a.setAdmin(iad.findById(1).get());
-		ifd.save(a);
-		assertEquals("Où se trouve l'oiseau?",ifd.findById(1).get().getQuestions());
-		assertEquals("Oui",ifd.findById(1).get().getReponses());
-		assertEquals(iad.findById(1).get(),ifd.findById(1).get().getAdmin());
+	public void testAjouterCoup() {
+		ModelCoup a = new ModelCoup();
+		a.setJoueur();
+		icd.save(a);
+		assertEquals("Toto",icd.findById(1).get().getLogin());
+		assertEquals("1234",icd.findById(2).get().getPassword());
 	}
 	
 	@Test
-	public void testFindAdmin() {
-		assertNotNull( ifd.findById(1).get());
+	public void testFindCoup() {
+		assertNotNull( icd.findById(1).get());
 	}
 	
 	@Test
-	public void testSupprimerAdmin() {
+	public void testSupprimerCoup() {
 		try {
-			ifd.deleteById(1);
-			assertFalse(ifd.findById(1).isPresent());
+			icd.deleteById(1);
+			assertFalse(icd.findById(1).isPresent());
 			}
 			catch (Exception e){
 				fail();
@@ -76,17 +71,17 @@ public class IFAQDAOTest {
 	}
 	
 	@Test
-	public void modifierProduit() {
-		Optional<ModelFAQ> myOptionalFAQ =  ifd.findById(1);
-		ModelFAQ myFAQ;
-		myFAQ=myOptionalFAQ.get();
-		assertNotNull(myFAQ);
-		assertNotEquals("ABCD",myFAQ.getReponses());
+	public void modifierCoup() {
+		Optional<ModelCoup> myOptionalCoup = icd.findById(1);
+		ModelCoup myCoup;
+		myCoup=myOptionalCoup.get();
+		assertNotNull(myCoup);
+		assertNotEquals("ABCD",myCoup.getLogin());
 		
-		myFAQ.setReponses("ABCD");
-		ifd.save(myFAQ);
+		myCoup.setLogin("ABCD");
+		icd.save(myCoup);
 		
-		assertEquals("ABCD", ifd.findById(1).get().getReponses());
+		assertEquals("ABCD", icd.findById(1).get().getLogin());
 	}
 	
 	
