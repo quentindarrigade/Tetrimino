@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
+import model.ModelTetrimino;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,7 +53,18 @@ public class IAdminDAOTest {
 		a.setPassword("1234");
 		iad.save(a);
 		assertEquals("Toto",iad.findById(1).get().getLogin());
-		assertEquals("1234",iad.findById(2).get().getPassword());
+		assertEquals("1234",iad.findById(1).get().getPassword());
+	}
+	
+	@Test
+	public void testFindPiece()  {
+		List<ModelTetrimino> l= iad.findById(1).get().getTetrimino();
+		assertEquals("Lenine",l.get(0).getNom());
+	}
+	
+	@Test
+	public void testFindFAQ() {
+		assertEquals("Où se trouve l'oiseau?",iad.findById(1).get().getFaq().get(0).getQuestions());
 	}
 	
 	@Test
