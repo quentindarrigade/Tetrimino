@@ -20,6 +20,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
+import model.ModelJoueur;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,11 +29,10 @@ import model.ModelAdmin;
 @Transactional
 @Rollback(true)
 
-public class IAdminDAOTest {
-	
+public class IJoueurDAOTest {
 
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
-	private IAdminDAO iad;
+	private IJoueurDAO ijd;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -39,31 +40,31 @@ public class IAdminDAOTest {
 	}
 
 	@Test
-	public void testBeanIAdminDAO() {
-		assertNotNull(iad);
+	public void testBeanIJoueurDAO() {
+		assertNotNull(ijd);
 		
 	}
 	
 	@Test
-	public void testAjouterAdmin() {
-		ModelAdmin a = new ModelAdmin();
-		a.setLogin("Toto");
+	public void testAjouterJoueur() {
+		ModelJoueur a = new ModelJoueur();
+		a.setLogin("Toti");
 		a.setPassword("1234");
-		iad.save(a);
-		assertEquals("Toto",iad.findById(1).get().getLogin());
-		assertEquals("1234",iad.findById(2).get().getPassword());
+		ijd.save(a);
+		assertEquals("Toti",ijd.findById(2).get().getLogin());
+		assertEquals("1234",ijd.findById(2).get().getPassword());
 	}
 	
 	@Test
-	public void testFindAdmin() {
-		assertNotNull( iad.findById(1).get());
+	public void testFindJoueur() {
+		assertNotNull( ijd.findById(2).get());
 	}
 	
 	@Test
-	public void testSupprimerAdmin() {
+	public void testSupprimerJoueur() {
 		try {
-			iad.deleteById(1);
-			assertFalse(iad.findById(1).isPresent());
+			ijd.deleteById(2);
+			assertFalse(ijd.findById(2).isPresent());
 			}
 			catch (Exception e){
 				fail();
@@ -71,18 +72,17 @@ public class IAdminDAOTest {
 	}
 	
 	@Test
-	public void modifierProduit() {
-		Optional<ModelAdmin> myOptionalAdmin = iad.findById(1);
-		ModelAdmin myAdmin;
-		myAdmin=myOptionalAdmin.get();
-		assertNotNull(myAdmin);
-		assertNotEquals("ABCD",myAdmin.getLogin());
+	public void modifierJoueur() {
+		Optional<ModelJoueur> myOptionalJoueur = ijd.findById(2);
+		ModelJoueur myJoueur;
+		myJoueur=myOptionalJoueur.get();
+		assertNotNull(myJoueur);
+		assertNotEquals("ABCD",myJoueur.getLogin());
 		
-		myAdmin.setLogin("ABCD");
-		iad.save(myAdmin);
+		myJoueur.setLogin("ABCD");
+		ijd.save(myJoueur);
 		
-		assertEquals("ABCD", iad.findById(1).get().getLogin());
-	}
-	
+		assertEquals("ABCD", ijd.findById(2).get().getLogin());
 
+}
 }

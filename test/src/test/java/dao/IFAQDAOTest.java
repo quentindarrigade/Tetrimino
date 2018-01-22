@@ -20,18 +20,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
+import model.ModelFAQ;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
 @Rollback(true)
-
-public class IAdminDAOTest {
+public class IFAQDAOTest {
 	
-
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
-	private IAdminDAO iad;
+	private IFAQDAO ifd;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -39,31 +39,31 @@ public class IAdminDAOTest {
 	}
 
 	@Test
-	public void testBeanIAdminDAO() {
-		assertNotNull(iad);
+	public void testBeanIFAQDAO() {
+		assertNotNull(ifd);
 		
 	}
 	
 	@Test
-	public void testAjouterAdmin() {
-		ModelAdmin a = new ModelAdmin();
-		a.setLogin("Toto");
+	public void testAjouterFAQ() {
+		ModelFAQ a = new ModelFAQ();
+		a.setQuestions("Où se trouve l'oiseau?");
 		a.setPassword("1234");
-		iad.save(a);
-		assertEquals("Toto",iad.findById(1).get().getLogin());
-		assertEquals("1234",iad.findById(2).get().getPassword());
+		ifd.save(a);
+		assertEquals("Toto",ifd.findById(1).get().getLogin());
+		assertEquals("1234",ifd.findById(2).get().getPassword());
 	}
 	
 	@Test
 	public void testFindAdmin() {
-		assertNotNull( iad.findById(1).get());
+		assertNotNull( ifd.findById(1).get());
 	}
 	
 	@Test
 	public void testSupprimerAdmin() {
 		try {
-			iad.deleteById(1);
-			assertFalse(iad.findById(1).isPresent());
+			ifd.deleteById(1);
+			assertFalse(ifd.findById(1).isPresent());
 			}
 			catch (Exception e){
 				fail();
@@ -72,17 +72,18 @@ public class IAdminDAOTest {
 	
 	@Test
 	public void modifierProduit() {
-		Optional<ModelAdmin> myOptionalAdmin = iad.findById(1);
+		Optional<ModelAdmin> myOptionalAdmin = ifd.findById(1);
 		ModelAdmin myAdmin;
 		myAdmin=myOptionalAdmin.get();
 		assertNotNull(myAdmin);
 		assertNotEquals("ABCD",myAdmin.getLogin());
 		
 		myAdmin.setLogin("ABCD");
-		iad.save(myAdmin);
+		ifd.save(myAdmin);
 		
-		assertEquals("ABCD", iad.findById(1).get().getLogin());
+		assertEquals("ABCD", ifd.findById(1).get().getLogin());
 	}
+	
 	
 
 }
