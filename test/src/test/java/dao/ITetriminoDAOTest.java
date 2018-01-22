@@ -30,18 +30,19 @@ import model.ModelTetrimino;
 public class ITetriminoDAOTest {
 	
 
-	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
+	@Autowired(required=false)//permet aux tests de s'exï¿½cuter mï¿½me si pas de bean prï¿½sent
 	private ITetriminoDAO itd;
+	@Autowired(required=false)//permet aux tests de s'exï¿½cuter mï¿½me si pas de bean prï¿½sent
+	private IAdminDAO iad;
 	
 	@BeforeClass
 	public static void initialisation() {
-		System.out.println("Démarrage du jeu de test....");
+		System.out.println("Dï¿½marrage du jeu de test....");
 	}
 
 	@Test
 	public void testBeanIAdminDAO() {
 		assertNotNull(itd);
-		
 	}
 	
 	
@@ -51,9 +52,16 @@ public class ITetriminoDAOTest {
 		ModelTetrimino a = new ModelTetrimino();
 		a.setCouleur("Rouge comme les communistes");
 		a.setNom("Lenine");
+		String tetri="1,1,1/1,0,1";
+		a.setTetrimino00(tetri);
+		a.setTetrimino90(tetri);
+		a.setTetrimino180(tetri);
+		a.setTetrimino270(tetri);
+		assertNotNull(iad);
+		a.setAdmin(iad.findById(1).get());
 		
 		itd.save(a);
-		assertEquals("Lenine",itd.findById(1).get().getNom());
+		assertEquals("Lenine",itd.findById(2).get().getNom());
 	}
 	
 	@Test

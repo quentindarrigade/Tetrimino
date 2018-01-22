@@ -22,4 +22,21 @@ public class ModelAdmin extends ModelUtilisateur {
 		super();
 	}
 
+	public List<ModelTetrimino> getTetrimino() {
+		return tetrimino;
+	}
+
+	public void setTetrimino(List<ModelTetrimino> tetrimino) {
+		this.tetrimino = tetrimino;
+	}
+
+	public List<ModelFAQ> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(List<ModelFAQ> faq) {
+		this.faq = faq;
+	}
+	
+
 }

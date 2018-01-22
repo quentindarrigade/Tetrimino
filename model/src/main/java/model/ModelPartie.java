@@ -34,6 +34,8 @@ public class ModelPartie implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="PARTIE_JOUEUR_ID")
 	private ModelJoueur joueur;
+	
+	
 
 	public int getId() {
 		return id;

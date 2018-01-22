@@ -33,6 +33,13 @@ public class ICoupDAOTest {
 	
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
 	private ICoupDAO icd;
+	@Autowired(required=false)
+	private IJoueurDAO ijd;
+	@Autowired(required=false)
+	private IPartieDAO ipd;
+	@Autowired(required=false)
+	private ITetriminoDAO itd;
+	
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -48,10 +55,17 @@ public class ICoupDAOTest {
 	@Test
 	public void testAjouterCoup() {
 		ModelCoup a = new ModelCoup();
-		a.setJoueur();
+		a.setJoueur(ijd.findById(1).get());
+		a.setPiece(itd.findById(1).get());
+		a.setPartie(ipd.findById(1).get());
+	
 		icd.save(a);
-		assertEquals("Toto",icd.findById(1).get().getLogin());
-		assertEquals("1234",icd.findById(2).get().getPassword());
+		System.out.println("************************************************"+"/n "+icd.findById(1).get().getJoueur().getLogin());
+		//System.out.println("************************************************"+"/n "+icd.findById(2).get().getJoueur());
+
+		assertEquals("Larmina",icd.findById(1).get().getJoueur().getLogin());
+		assertEquals("Lenine",icd.findById(1).get().getPiece().getNom());
+		
 	}
 	
 	@Test
@@ -70,19 +84,19 @@ public class ICoupDAOTest {
 			}
 	}
 	
-	@Test
+	/*@Test
 	public void modifierCoup() {
 		Optional<ModelCoup> myOptionalCoup = icd.findById(1);
 		ModelCoup myCoup;
 		myCoup=myOptionalCoup.get();
 		assertNotNull(myCoup);
-		assertNotEquals("ABCD",myCoup.getLogin());
+		//assertNotEquals("ABCD",myCoup.getLogin());
 		
 		myCoup.setLogin("ABCD");
 		icd.save(myCoup);
 		
 		assertEquals("ABCD", icd.findById(1).get().getLogin());
-	}
+	}*/
 	
 	
 
