@@ -41,9 +41,7 @@ public class ModelTetrimino implements Serializable {
 	@Column(name = "TETRI_270")
 	private String Tetrimino270;
 
-	@Column(name = "TETRI_TAILLE")
-	private int taille;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "TETRI_ADMIN_ID")
 	private ModelAdmin admin;
@@ -86,19 +84,13 @@ public class ModelTetrimino implements Serializable {
 		this.coups = coups;
 	}
 
-	public int getTaille() {
-		return taille;
-	}
-
-	public void setTaille(int taille) {
-		this.taille = taille;
-	}
+	
 
 	public void ModelTetrimino() {
 
 	}
 
-	public void Rotation(String str) {
+	public String rotation(String str) {
 		String reponse = "";
 		String[] t1 = str.split("/");
 		int hauteur = t1.length;
@@ -117,6 +109,8 @@ public class ModelTetrimino implements Serializable {
 			}
 			reponse += "/";
 		}
+		
+		return reponse;
 
 	}
 
@@ -132,24 +126,24 @@ public class ModelTetrimino implements Serializable {
 		return Tetrimino90;
 	}
 
-	public void setTetrimino90(String tetrimino90) {
-		Tetrimino90 = tetrimino90;
+	public void setTetrimino90(String tetrimino00) {
+		Tetrimino90 = rotation(tetrimino00);
 	}
 
 	public String getTetrimino180() {
 		return Tetrimino180;
 	}
 
-	public void setTetrimino180(String tetrimino180) {
-		Tetrimino180 = tetrimino180;
+	public void setTetrimino180(String tetrimino00) {
+		Tetrimino180 = rotation(rotation(tetrimino00));
 	}
 
 	public String getTetrimino270() {
 		return Tetrimino270;
 	}
 
-	public void setTetrimino270(String tetrimino270) {
-		Tetrimino270 = tetrimino270;
+	public void setTetrimino270(String tetrimino00) {
+		Tetrimino270 =rotation(rotation(rotation(tetrimino00)));
 	}
 
 	public int getId() {

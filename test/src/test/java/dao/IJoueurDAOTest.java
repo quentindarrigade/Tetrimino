@@ -27,7 +27,7 @@ import model.ModelJoueur;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
-@Rollback(false)
+@Rollback(true)
 
 public class IJoueurDAOTest {
 
@@ -55,12 +55,17 @@ public class IJoueurDAOTest {
 		assertEquals("1234",ijd.findById(6).get().getPassword());
 	}
 	
-	//@Test
+	@Test
+	public void testFindPartie() {
+		assertEquals(1,ijd.findById(2).get().getParties().get(0).getId());
+	}
+	
+	@Test
 	public void testFindJoueur() {
 		assertNotNull( ijd.findById(2).get());
 	}
 	
-	//@Test
+	@Test
 	public void testSupprimerJoueur() {
 		try {
 			ijd.deleteById(2);
@@ -71,7 +76,7 @@ public class IJoueurDAOTest {
 			}
 	}
 	
-	//@Test
+	@Test
 	public void modifierJoueur() {
 		Optional<ModelJoueur> myOptionalJoueur = ijd.findById(2);
 		ModelJoueur myJoueur;
@@ -84,5 +89,5 @@ public class IJoueurDAOTest {
 		
 		assertEquals("ABCD", ijd.findById(2).get().getLogin());
 
-}
+	}
 }

@@ -16,6 +16,25 @@ public class ModelJoueur extends ModelUtilisateur {
 
 	@OneToMany(mappedBy = "joueur")
 	private List<ModelCoup> coup;
+	
+	@OneToMany(mappedBy="joueur")
+	private List<ModelPartie> parties;
+
+	public List<ModelCoup> getCoup() {
+		return coup;
+	}
+
+	public void setCoup(List<ModelCoup> coup) {
+		this.coup = coup;
+	}
+
+	public List<ModelPartie> getParties() {
+		return parties;
+	}
+
+	public void setParties(List<ModelPartie> parties) {
+		this.parties = parties;
+	}
 
 	public ModelJoueur() {
 		super();
