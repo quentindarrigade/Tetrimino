@@ -20,20 +20,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
-import model.ModelFAQ;
-
+import model.ModelTetrimino;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
 @Rollback(true)
-public class IFAQDAOTest {
+public class ModelTetriminoTest {
 	
+
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
-	private IFAQDAO ifd;
-	@Autowired(required=false)
-	private IAdminDAO iad;
+	private ITetriminoDAO itd;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -41,34 +39,34 @@ public class IFAQDAOTest {
 	}
 
 	@Test
-	public void testBeanIFAQDAO() {
-		assertNotNull(ifd);
+	public void testBeanIAdminDAO() {
+		assertNotNull(itd);
 		
 	}
 	
-	@Test
-	public void testAjouterFAQ() {
-		ModelFAQ a = new ModelFAQ();
-		a.setQuestions("Où se trouve l'oiseau?");
-		a.setReponses("Oui");
-		assertNotNull(iad);
-		a.setAdmin(iad.findById(1).get());
-		ifd.save(a);
-		assertEquals("Où se trouve l'oiseau?",ifd.findById(1).get().getQuestions());
-		assertEquals("Oui",ifd.findById(1).get().getReponses());
-		assertEquals(iad.findById(1).get(),ifd.findById(1).get().getAdmin());
+	
+	
+@Test
+	public void testAjouterTetrimino() {
+		ModelTetrimino a = new ModelTetrimino();
+		a.setCouleur("Rouge comme les communistes");
+		a.setNom("Lenine");
+		
+		itd.save(a);
+		assertEquals("Lenine",itd.findById(1).get().getNom());
 	}
 	
 	@Test
-	public void testFindAdmin() {
-		assertNotNull( ifd.findById(1).get());
+	public void testFindTetrimino() {
+		assertNotNull( itd.findById(1).get());
 	}
 	
+
 	@Test
-	public void testSupprimerAdmin() {
+	public void testSupprimerTetrimino() {
 		try {
-			ifd.deleteById(1);
-			assertFalse(ifd.findById(1).isPresent());
+			itd.deleteById(1);
+			assertFalse(itd.findById(1).isPresent());
 			}
 			catch (Exception e){
 				fail();
@@ -76,19 +74,18 @@ public class IFAQDAOTest {
 	}
 	
 	@Test
-	public void modifierProduit() {
-		Optional<ModelFAQ> myOptionalFAQ =  ifd.findById(1);
-		ModelFAQ myFAQ;
-		myFAQ=myOptionalFAQ.get();
-		assertNotNull(myFAQ);
-		assertNotEquals("ABCD",myFAQ.getReponses());
+	public void modifierTetrimino() {
+		Optional<ModelTetrimino> myOptionalTetrimino = itd.findById(1);
+		ModelTetrimino myTetrimino;
+		myTetrimino=myOptionalTetrimino.get();
+		assertNotNull(myTetrimino);
+		assertNotEquals("Coty",myTetrimino.getNom());
 		
-		myFAQ.setReponses("ABCD");
-		ifd.save(myFAQ);
+		myTetrimino.setNom("Coty");
+		itd.save(myTetrimino);
 		
-		assertEquals("ABCD", ifd.findById(1).get().getReponses());
+		assertEquals("Coty", itd.findById(1).get().getNom());
 	}
-	
 	
 
 }
