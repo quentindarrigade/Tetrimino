@@ -32,6 +32,8 @@ public class IFAQDAOTest {
 	
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
 	private IFAQDAO ifd;
+	@Autowired(required=false)
+	private IAdminDAO iad;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -48,10 +50,13 @@ public class IFAQDAOTest {
 	public void testAjouterFAQ() {
 		ModelFAQ a = new ModelFAQ();
 		a.setQuestions("Où se trouve l'oiseau?");
-		a.setPassword("1234");
+		a.setReponses("Oui");
+		assertNotNull(iad);
+		a.setAdmin(iad.findById(1).get());
 		ifd.save(a);
-		assertEquals("Toto",ifd.findById(1).get().getLogin());
-		assertEquals("1234",ifd.findById(2).get().getPassword());
+		assertEquals("Où se trouve l'oiseau?",ifd.findById(1).get().getQuestions());
+		assertEquals("Oui",ifd.findById(1).get().getReponses());
+		assertEquals(iad.findById(1).get(),ifd.findById(1).get().getAdmin());
 	}
 	
 	@Test
@@ -72,16 +77,16 @@ public class IFAQDAOTest {
 	
 	@Test
 	public void modifierProduit() {
-		Optional<ModelAdmin> myOptionalAdmin = ifd.findById(1);
-		ModelAdmin myAdmin;
-		myAdmin=myOptionalAdmin.get();
-		assertNotNull(myAdmin);
-		assertNotEquals("ABCD",myAdmin.getLogin());
+		Optional<ModelFAQ> myOptionalFAQ =  ifd.findById(1);
+		ModelFAQ myFAQ;
+		myFAQ=myOptionalFAQ.get();
+		assertNotNull(myFAQ);
+		assertNotEquals("ABCD",myFAQ.getReponses());
 		
-		myAdmin.setLogin("ABCD");
-		ifd.save(myAdmin);
+		myFAQ.setReponses("ABCD");
+		ifd.save(myFAQ);
 		
-		assertEquals("ABCD", ifd.findById(1).get().getLogin());
+		assertEquals("ABCD", ifd.findById(1).get().getReponses());
 	}
 	
 	
