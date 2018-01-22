@@ -31,12 +31,12 @@ import model.ModelJoueur;
 
 public class IJoueurDAOTest {
 
-	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
+	@Autowired(required=false)//permet aux tests de s'exï¿½cuter mï¿½me si pas de bean prï¿½sent
 	private IJoueurDAO ijd;
 	
 	@BeforeClass
 	public static void initialisation() {
-		System.out.println("Démarrage du jeu de test....");
+		System.out.println("Dï¿½marrage du jeu de test....");
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class IJoueurDAOTest {
 		
 	}
 	
-	@Test
+	
 	public void testAjouterJoueur() {
 		ModelJoueur a = new ModelJoueur();
 		a.setLogin("Tota");
