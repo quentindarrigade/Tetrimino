@@ -20,19 +20,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
-import model.ModelJoueur;
-
+import model.ModelTetrimino;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
-@Rollback(false)
-
-public class IJoueurDAOTest {
+@Rollback(true)
+public class ITetriminoDAOTest {
+	
 
 	@Autowired(required=false)//permet aux tests de s'exécuter même si pas de bean présent
-	private IJoueurDAO ijd;
+	private ITetriminoDAO itd;
 	
 	@BeforeClass
 	public static void initialisation() {
@@ -40,49 +39,53 @@ public class IJoueurDAOTest {
 	}
 
 	@Test
-	public void testBeanIJoueurDAO() {
-		assertNotNull(ijd);
+	public void testBeanIAdminDAO() {
+		assertNotNull(itd);
 		
 	}
 	
+	
+	
+@Test
+	public void testAjouterTetrimino() {
+		ModelTetrimino a = new ModelTetrimino();
+		a.setCouleur("Rouge comme les communistes");
+		a.setNom("Lenine");
+		
+		itd.save(a);
+		assertEquals("Lenine",itd.findById(1).get().getNom());
+	}
+	
 	@Test
-	public void testAjouterJoueur() {
-		ModelJoueur a = new ModelJoueur();
-		a.setLogin("Tota");
-		a.setPassword("1234");
-		ijd.save(a);
-		assertEquals("Tota",ijd.findById(6).get().getLogin());
-		assertEquals("1234",ijd.findById(6).get().getPassword());
+	public void testFindTetrimino() {
+		assertNotNull( itd.findById(1).get());
 	}
 	
-	//@Test
-	public void testFindJoueur() {
-		assertNotNull( ijd.findById(2).get());
-	}
-	
-	//@Test
-	public void testSupprimerJoueur() {
+
+	@Test
+	public void testSupprimerTetrimino() {
 		try {
-			ijd.deleteById(2);
-			assertFalse(ijd.findById(2).isPresent());
+			itd.deleteById(1);
+			assertFalse(itd.findById(1).isPresent());
 			}
 			catch (Exception e){
 				fail();
 			}
 	}
 	
-	//@Test
-	public void modifierJoueur() {
-		Optional<ModelJoueur> myOptionalJoueur = ijd.findById(2);
-		ModelJoueur myJoueur;
-		myJoueur=myOptionalJoueur.get();
-		assertNotNull(myJoueur);
-		assertNotEquals("ABCD",myJoueur.getLogin());
+	@Test
+	public void modifierTetrimino() {
+		Optional<ModelTetrimino> myOptionalTetrimino = itd.findById(1);
+		ModelTetrimino myTetrimino;
+		myTetrimino=myOptionalTetrimino.get();
+		assertNotNull(myTetrimino);
+		assertNotEquals("Coty",myTetrimino.getNom());
 		
-		myJoueur.setLogin("ABCD");
-		ijd.save(myJoueur);
+		myTetrimino.setNom("Coty");
+		itd.save(myTetrimino);
 		
-		assertEquals("ABCD", ijd.findById(2).get().getLogin());
+		assertEquals("Coty", itd.findById(1).get().getNom());
+	}
+	
 
-}
 }

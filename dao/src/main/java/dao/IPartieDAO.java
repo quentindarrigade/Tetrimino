@@ -2,8 +2,8 @@ package dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import model.ModelAdmin;
+import model.ModelPartie;
 
-public interface IPartieDAO extends JpaRepository< ModelAdmin, Integer>{
+public interface IPartieDAO extends JpaRepository< ModelPartie, Integer>{
 
 }
