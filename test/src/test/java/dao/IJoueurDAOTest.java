@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -20,7 +22,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.AppConfig;
 import model.ModelAdmin;
+import model.ModelCoup;
 import model.ModelJoueur;
+import model.ModelTetrimino;
 
 
 
@@ -34,6 +38,7 @@ public class IJoueurDAOTest {
 	@Autowired(required=false)//permet aux tests de s'ex�cuter m�me si pas de bean pr�sent
 	private IJoueurDAO ijd;
 	
+	
 	@BeforeClass
 	public static void initialisation() {
 		System.out.println("D�marrage du jeu de test....");
@@ -45,25 +50,50 @@ public class IJoueurDAOTest {
 		
 	}
 	
-	
+	@Test
 	public void testAjouterJoueur() {
 		ModelJoueur a = new ModelJoueur();
 		a.setLogin("Tota");
 		a.setPassword("1234");
 		ijd.save(a);
-		assertEquals("Tota",ijd.findById(6).get().getLogin());
-		assertEquals("1234",ijd.findById(6).get().getPassword());
+		assertEquals("Larmina",ijd.findById(1).get().getLogin());
+		assertNotEquals("1234",ijd.findById(1).get().getPassword());
 	}
 	
 	@Test
 	public void testFindPartie() {
-		assertEquals(1,ijd.findById(2).get().getParties().get(0).getId());
+		assertEquals(1,ijd.findById(1).get().getParties().get(0).getId());
 	}
 	
 	@Test
 	public void testFindJoueur() {
 		assertNotNull( ijd.findById(2).get());
 	}
+	
+	@Test
+	public void testQuery() {
+		assertEquals( "Larmina", ijd.authJoueur("Larmina", "1234").getLogin());
+	/*	try {
+		ijd.authJoueur("Larmina", "1234");
+		}
+		catch (Exception e) {
+			fail();
+			System.out.println("ERROR");
+		}*/
+		
+		
+		//assertEquals( "Larmina", ijd.authJoueur("Larmina", "1234").getLogin());
+	}
+	
+	@Test
+	public void testFindCoup() {
+		List<ModelCoup> l= ijd.findById(1).get().getCoup();
+		assertEquals(1,l.get(0).getId());
+	}
+	
+	
+	
+	
 	
 	@Test
 	public void testSupprimerJoueur() {
