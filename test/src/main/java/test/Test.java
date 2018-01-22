@@ -15,39 +15,41 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		//AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(AppConfig.class);		
+		AnnotationConfigApplicationContext myContext = new AnnotationConfigApplicationContext(AppConfig.class);
+	}
+}
 	/*	ModelTetrimino p1 = new ModelTetrimino();
 		p1.setTetrimino00("1,0,1/1,1,1");
-		System.out.println(p1.getTetrimino00());*/
-		String str = "1,0,1/1,1,1/";
-		String reponse="";
-		String [] t1= str.split("/");
-        int hauteur = t1.length;
-        int largeur = t1[0].split(",").length;
-        String [][] l2= new String [hauteur] [largeur];
-        for (int i=0; i<hauteur;i++) {
-            String [] t = t1[i].split(",");
-            for (int j=0; j<largeur;j++) {
-                l2[i][j] = t[j];
-            }
-        }
-       // String [][] l3= new String [largeur] [hauteur];
-        for (int i=0;i< largeur;i++) {
-            for (int j =0;j<hauteur;j++) {
-                reponse= reponse + l2[hauteur-j-1][i]+",";
-            }
-            reponse+="/";
-        }
-        
-//        for(int i =0;i<largeur;i++) {
-//        	for (int j=0;j<hauteur;j++) {
-//        		reponse=reponse + l3[i][j]+ ",";
-//        	}
-//        	reponse+="/";
+//		System.out.println(p1.getTetrimino00());*/
+//		String str = "1,0,1/1,1,1/";
+//		String reponse="";
+//		String [] t1= str.split("/");
+//        int hauteur = t1.length;
+//        int largeur = t1[0].split(",").length;
+//        String [][] l2= new String [hauteur] [largeur];
+//        for (int i=0; i<hauteur;i++) {
+//            String [] t = t1[i].split(",");
+//            for (int j=0; j<largeur;j++) {
+//                l2[i][j] = t[j];
+//            }
 //        }
-        
-        System.out.println(reponse);
-		}
+//       // String [][] l3= new String [largeur] [hauteur];
+//        for (int i=0;i< largeur;i++) {
+//            for (int j =0;j<hauteur;j++) {
+//                reponse= reponse + l2[hauteur-j-1][i]+",";
+//            }
+//            reponse+="/";
+//        }
+//        
+////        for(int i =0;i<largeur;i++) {
+////        	for (int j=0;j<hauteur;j++) {
+////        		reponse=reponse + l3[i][j]+ ",";
+////        	}
+////        	reponse+="/";
+////        }
+//        
+//        System.out.println(reponse);
+//		}
 		
 		
 		
@@ -116,7 +118,7 @@ public class Test {
             }
         }
         System.out.println(b);*/
-    }
+    
 
 	
 		

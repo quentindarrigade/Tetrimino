@@ -58,7 +58,13 @@ public class IAdminDAOTest {
 	
 	@Test
 	public void testConnectionBase() {
-		assertEquals("Toto",iad.auth("Toto","1234").getLogin());
+		assertEquals(1,iad.authAdmin("Toto","1234").getId());
+		try {
+			assertEquals(1,iad.authAdmin("Toto","1234").getId());
+			}
+			catch (Exception e){
+				fail();
+			}
 	}
 	
 	@Test

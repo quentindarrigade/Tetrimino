@@ -10,7 +10,7 @@ public interface IAdminDAO extends JpaRepository< ModelAdmin, Integer> {
 	
 	
 	@Query("select a from ModelAdmin a where a.login=:reference1 and a.password =:reference2")
-	public ModelAdmin auth(@Param("reference1") String ref1,  @Param("reference2") String ref2);
+	public ModelAdmin authAdmin(@Param("reference1") String ref1,  @Param("reference2") String ref2);
 	
 
 }
