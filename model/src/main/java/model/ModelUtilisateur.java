@@ -27,7 +27,7 @@ public class ModelUtilisateur implements Serializable  {
 	@Column(name = "UTI_ID")
 	private int id;
 	
-	@Column(name = "UTI_LOG")
+	@Column(name = "UTI_LOG", unique=true)
 	private String login;
 	
 	@Column(name = "UTI_PSW")

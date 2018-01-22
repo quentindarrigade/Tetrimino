@@ -63,6 +63,12 @@ public class ITetriminoDAOTest {
 		itd.save(a);
 		assertEquals("Lenine",itd.findById(2).get().getNom());
 	}
+
+	@Test
+	public void testFindCoup() {
+		assertEquals(2,itd.findById(1).get().getCoups().get(0).getId());
+	}
+	
 	
 	@Test
 	public void testFindTetrimino() {

@@ -56,6 +56,11 @@ public class IPartieDAOTest {
 	}
 	
 	@Test
+	public void testFindCoup() {
+		assertEquals(2,ipd.findById(1).get().getCoups().get(0).getId());
+	}
+	
+	@Test
 	public void testFindPartie() {
 		assertNotNull( ipd.findById(1).get());
 	}
