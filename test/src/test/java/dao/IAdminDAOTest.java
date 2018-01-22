@@ -57,6 +57,11 @@ public class IAdminDAOTest {
 	}
 	
 	@Test
+	public void testConnectionBase() {
+		assertEquals("Toto",iad.auth("Toto","1234").getLogin());
+	}
+	
+	@Test
 	public void testFindPiece()  {
 		List<ModelTetrimino> l= iad.findById(1).get().getTetrimino();
 		assertEquals("Lenine",l.get(0).getNom());

@@ -55,29 +55,28 @@ public class ICoupDAOTest {
 	@Test
 	public void testAjouterCoup() {
 		ModelCoup a = new ModelCoup();
-		a.setJoueur(ijd.findById(1).get());
+		a.setJoueur(ijd.findById(2).get());
 		a.setPiece(itd.findById(1).get());
 		a.setPartie(ipd.findById(1).get());
 	
 		icd.save(a);
-		System.out.println("************************************************"+"/n "+icd.findById(1).get().getJoueur().getLogin());
-		//System.out.println("************************************************"+"/n "+icd.findById(2).get().getJoueur());
+		
 
-		assertEquals("Larmina",icd.findById(1).get().getJoueur().getLogin());
-		assertEquals("Lenine",icd.findById(1).get().getPiece().getNom());
+		assertEquals("Toti",icd.findById(2).get().getJoueur().getLogin());
+		assertEquals("Lenine",icd.findById(2).get().getPiece().getNom());
 		
 	}
 	
 	@Test
 	public void testFindCoup() {
-		assertNotNull( icd.findById(1).get());
+		assertNotNull( icd.findById(2).get());
 	}
 	
 	@Test
 	public void testSupprimerCoup() {
 		try {
-			icd.deleteById(1);
-			assertFalse(icd.findById(1).isPresent());
+			icd.deleteById(2);
+			assertFalse(icd.findById(2).isPresent());
 			}
 			catch (Exception e){
 				fail();
