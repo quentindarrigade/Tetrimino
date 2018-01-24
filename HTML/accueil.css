@@ -1,0 +1,86 @@
+body {
+background-image: url(file:///C:tetris1.png);
+background-size: cover;
+}
+
+footer {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  height: 12px;
+}
+
+ul {
+  font-size: 4;
+  background-color: lightgrey;
+}
+
+
+
+trouge {
+  font-size: 48;
+  color: black;
+  font-weight: 600;
+  background-color: red;
+  border-color:black;
+  border: 2px solid #333;
+ box-shadow: 2px 2px;
+ transition: all 0.1s ease;
+
+}
+
+tbleu {
+  font-size: 48;
+  color: black;
+  font-weight: 600;
+  background-color: blue;
+  border-color:black;
+  border: 2px solid #333;
+  box-shadow: 2px 2px;
+}
+
+tvert {
+  font-size: 48;
+  color: black;
+  font-weight: 600;
+  background-color: green;
+  border-color:black;
+  border: 2px solid #333;
+  box-shadow: 2px 2px;
+}
+
+tjaune {
+  font-size: 48;
+  color: black;
+  font-weight: 600;
+  background-color: yellow;
+  border-color:black;
+  border: 2px solid #333;
+  box-shadow: 2px 2px;
+}
+
+h1 {
+  font-size: 96;
+  color: black;
+  font-weight: 600;
+  background-color: ;
+  border-color:black;
+  border: 2px solid #333;
+ box-shadow: 2px 2px;
+}
+
+trouge:hover, tbleu:hover, tvert:hover, tjaune:hover, footer:hover{
+  color: white;
+  transition: all 1s ease;
+  animation: lettre 2s;
+  animation-iteration-count:infinite;
+  animation-direction: alternate;
+}
+
+
+@keyframes lettre
+{
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg);  }
+  100% { transform: rotateY(360deg); }
+}
