@@ -35,7 +35,17 @@ public class ModelPartie implements Serializable {
 	@JoinColumn(name="PARTIE_JOUEUR_ID")
 	private ModelJoueur joueur;
 	
+	@Column(name="SCORE")
+	private double score;
 	
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
 
 	public int getId() {
 		return id;
