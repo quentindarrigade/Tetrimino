@@ -22,6 +22,7 @@ import config.AppConfig;
 import model.ModelAdmin;
 import model.ModelCoup;
 import model.ModelFAQ;
+import model.ModelJoueur;
 
 
 
@@ -73,6 +74,16 @@ public class ICoupDAOTest {
 	}
 	
 	@Test
+	public void testFindPartie() {
+		assertEquals(1,ijd.findById(2).get().getParties().get(0).getId());
+	}
+	
+	@Test
+	public void testFindJoueur() {
+		assertEquals(1,ijd.findById(2).get().getParties().get(0).getId());
+	}
+	
+	@Test
 	public void testSupprimerCoup() {
 		try {
 			icd.deleteById(2);
@@ -83,19 +94,16 @@ public class ICoupDAOTest {
 			}
 	}
 	
-	/*@Test
+	@Test
 	public void modifierCoup() {
 		Optional<ModelCoup> myOptionalCoup = icd.findById(1);
 		ModelCoup myCoup;
 		myCoup=myOptionalCoup.get();
 		assertNotNull(myCoup);
-		//assertNotEquals("ABCD",myCoup.getLogin());
-		
-		myCoup.setLogin("ABCD");
-		icd.save(myCoup);
-		
-		assertEquals("ABCD", icd.findById(1).get().getLogin());
-	}*/
+		assertNotEquals("ABCD",myCoup.getJoueur().getLogin());
+	
+
+	}
 	
 	
 
