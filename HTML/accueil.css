@@ -1,8 +1,7 @@
 body {
 background-image: url(tetris2.jpg);
 background-size: cover;
-perspective: 800px;
-   perspective-origin: 20px 70px;
+
 }
 
 footer {
@@ -11,7 +10,7 @@ footer {
   font-style: italic;
   opacity: 50%;
   bottom: 45px;
-  right: -21px;
+  right: -0px;
   height: 12px;
 }
 
@@ -21,11 +20,12 @@ text-align: left;
 
 ul >li {
   display: inline-block;
+  height: 16px;
 }
 
 li [class=menu]{
     display:inline-block;
-    margin-top: 200px;
+    margin-top: 20px;
   bottom; 20px;
 }
 
@@ -33,7 +33,6 @@ li [class=menu]{
 trouge {
   display:inline-block;
  text-align: center;
-
   width: 50px;
   font-size: 48;
   color: black;
@@ -43,7 +42,6 @@ trouge {
   border: 2px solid #333;
  box-shadow: 2px 2px;
  transition: all 0.1s ease;
-
 }
 
 tbleu {
@@ -124,7 +122,7 @@ div1 ~ label {
 }
 
 
-inscription > label,  p >label {
+inscription > label,  p >label, h3 {
   display:inline-block;
   font-weight: bold;
   font-family: fantasy;
@@ -137,6 +135,10 @@ background-color: grey;
 border: 2px solid #333;
 border-color: black;
 box-shadow: 2px 2px;
+}
+
+h3 {
+  width: 250px;
 }
 
 inscription > input {
@@ -163,6 +165,12 @@ INPUT.bouton  {
   border: 2px solid #333;
  box-shadow: 5px 5px;
  transition: all 0.1s ease;
+
+}
+
+INPUT.bouton:hover {
+  background:url(reine2.jpg) no-repeat;
+  background-color: pink;
 }
 
 INPUT.bouton:hover + img {
@@ -182,7 +190,6 @@ div2{
   display: inline-block;
     left: 1070px;
     top: 170px;
-
 }
 
 div2:hover {
@@ -225,7 +232,8 @@ div2:hover {
 }
 
 revenir {
-
+height: 16px;
+display: inline-block;
 }
 
 @keyframes tableau
@@ -245,9 +253,6 @@ revenir {
 0% { transform: translateY(0px); }
 100% { transform:   translateX(150px) translateY(420px);   }
 }
-
-
-
 
 trouge:hover, tbleu:hover, tvert:hover, tjaune:hover, footer:hover{
     display:inline-block;
