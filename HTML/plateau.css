@@ -214,3 +214,15 @@ body{
 .perso1:hover>img, .perso2:hover>img,.perso3:hover>img, .perso4:hover>img{
   opacity:0.6;
 }
+.menu{
+  position: relative;
+  float: left;
+
+}
+
+.bouton{
+  width: 15px;
+  height: 15px;
+  border: solid 1px #000;
+  transform: rotate(45deg);
+}
