@@ -10,16 +10,16 @@
 
   background-image: url(pedalo.jpg);
   background-repeat: no-repeat;
-  background-size: 100% 110%;
+  background-size: 100% 100%;
 
 
 }
 .plateaucomplet{
 
   position:relative;
-
+  left:40%;
   height:500px;
-  width:250px;
+  width:300px;
    border-style: solid;
    border-color: black;
 
@@ -31,4 +31,51 @@
 
 .plateau audio{
   display:none;
+}
+
+.tetrimino{
+  position:relative;
+  height:100px;
+  width:150px;
+  top:50%;
+  left:40%;
+
+}
+.ligne1{
+  position:relative;
+  height:50px;
+  width:50px;
+  top:0px;
+  right:0px;
+  background-image: url(poulecarre.png);
+  background-size:100% 100%;
+  
+}
+
+.ligne2 {
+  position: relative;
+  height:50px;
+  width:150px;
+
+}
+
+#i1,#i2,#i3{
+  position:relative;
+  float:left;
+  height:50px;
+  width:50px;
+
+}
+
+.ligne1:hover, #i1:hover, #i2:hover, #i3:hover{
+  animation:rotation 0.2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation{
+  25%{transform:rotate(90deg);}
+  50%{transform: rotate(180deg);}
+  75%{transform: rotate(270deg);}
+  100%{transform:rotate(360deg);}
+
 }
