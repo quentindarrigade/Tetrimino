@@ -17,7 +17,7 @@
 
 .plateauscore{
   position:relative;
-  top:0px;
+  top:20px;
   float:left;
   margin-left: 10px;
 
@@ -265,9 +265,9 @@ input[type="checkbox"]:checked+label:after{
 }
 
 .bouton{
-  position:relative;
-  float:left;
-  left:430px;
+  position:absolute;
+  right: -370px;
+  top: 20px;
 }
 
 .menu{
@@ -374,4 +374,40 @@ input[type="checkbox"]:checked+label+.menu{
 
 .leaderboard:hover{
   transform: scale(1.2);
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    overflow: auto;
+  }
+  .description,.information,.titre,.perso1,.perso2,.perso3,.perso4{
+    display: none;
+  }
+
+  .plateaucomplet, .livescore{
+    margin-top: -20px;
+  }
+
+  .plateaucomplet {
+    width: calc(400px / 1.5);
+    height :calc(700px / 1.5);
+  }
+  .livescore{
+    width: calc(200px/1.5);
+    height: calc(200px/1.5);
+
+
+  }
+  #i1,#i2,#i3, .ligne1{
+    width:calc(50px/1.5);
+    height:calc(50px/1.5);
+  }
+
+  #i4,#i5,#i6,#i7,.vide{
+    width:calc(35px/1.5);
+    height:calc(35px/1.5);
+  }
+  .ligne3,.ligne4{
+    height:calc(35px/1.5);
+  }
 }
