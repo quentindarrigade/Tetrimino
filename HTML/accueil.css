@@ -162,7 +162,7 @@ INPUT.bouton  {
 }
 
 INPUT.bouton:hover {
-  background:url(reine2.jpg) no-repeat;
+  background:url(reine2.png) no-repeat;
   background-color: pink;
 }
 
