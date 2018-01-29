@@ -375,3 +375,28 @@ input[type="checkbox"]:checked+label+.menu{
 .leaderboard:hover{
   transform: scale(1.2);
 }
+.poule{
+  background-image: url(poulecarre.png);
+  background-size: 100% 100%;
+  /* background-color: red; */
+  position:relative;
+  float:left;
+  height:50px;
+  width:50px;
+
+}
+.vide{
+  /* background-image: url(poulecarre.png); */
+  position:relative;
+  float:left;
+  height:50px;
+  width:50px;
+
+}
+.ligne{
+  height: 50px;
+}
+.tetri{
+  display:inline-block;
+  margin-top: -90px;
+}
