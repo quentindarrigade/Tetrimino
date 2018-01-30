@@ -27,4 +27,21 @@ for(var i=0;i<arrayOfStrings1.length;i++){
 }
 
 ajouterPiece(figure1);
-ajouterPiece(figure1);
+
+$(document).ready(function(){
+    $(document).keydown(function (e) {
+        var keyCode = e.keyCode || e.which,
+        arrow = {left: 37, up: 38, right: 39, down: 40 };
+        switch (keyCode) {
+            case arrow.left:
+                $('div[class="tetri"]').animate({"left": "-=50px"},'fast');
+            break;
+            case arrow.right:
+                $('div[class="tetri"]').animate({"left": "+=50px"},'fast');
+            break;
+            case arrow.down:
+                $('div[class="tetri"]').animate({"bottom": "-=50px"},'fast');
+            break;
+        }
+    });
+});
