@@ -1,10 +1,12 @@
 var figure1= '1,1,1/1,0,0';
 var figure1_90='1,1/0,1/0,1';
+
 function ajouterPiece(str){
 var arrayOfStrings1 =str.split('/');
 var tetri=$('<div/>');
 tetri.addClass('tetri');
-$('div[class="plateau"]').append(tetri);
+tetri.addClass('current');
+$('div.plateau').append(tetri);
 for(var i=0;i<arrayOfStrings1.length;i++){
   arraysOfStrings2=arrayOfStrings1[i].split(',');
   var ligne=$('<div/>');
@@ -25,23 +27,55 @@ for(var i=0;i<arrayOfStrings1.length;i++){
   }
 };
 }
-
 ajouterPiece(figure1);
+
+var tab = document.querySelectorAll('div.ligne');
+console.log(tab);
+var ligne=tab[tab.length-1];
+console.log(typeof ligne);
+
+var top2 =ligne.offsetTop;
+
+console.log(top2  );
+
+
+
 
 $(document).ready(function(){
     $(document).keydown(function (e) {
         var keyCode = e.keyCode || e.which,
         arrow = {left: 37, up: 38, right: 39, down: 40 };
+
         switch (keyCode) {
             case arrow.left:
-                $('div[class="tetri"]').animate({"left": "-=50px"},'fast');
+                if(document.querySelector('div.current').offsetLeft>00){
+                    $('div.current').css({"left": "-=50px"},'fast');
+                }
+
             break;
             case arrow.right:
-                $('div[class="tetri"]').animate({"left": "+=50px"},'fast');
+              if(document.querySelector('div.current').offsetLeft <$('div.plateaucomplet').width()-$('div.current').width()){
+                $('div.current').css({"left": "+=50px"},'fast');
+              }
             break;
             case arrow.down:
-                $('div[class="tetri"]').animate({"bottom": "-=50px"},'fast');
+              if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
+                $('div.current').css({"bottom": "-=50px"},'fast');
+              }
             break;
+            case arrow.up:
+              var left =document.querySelector('div.current').offsetLeft;
+              var top =document.querySelector('div.current').offsetTop;
+
+              $('div.current').addClass('none')
+
+              $('div.current').removeClass('current');
+              $('div.tetri').replaceWith(ajouterPiece(figure1_90));
+
+
+              $('div.current').css({"left": "+="+left+"px"},'fast');
+              $('div.current').css({"bottom": "-="+top+"px"},'fast');
+
         }
     });
 });
