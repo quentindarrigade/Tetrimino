@@ -1,11 +1,18 @@
 var figure1= '1,1,1/1,0,0';
 var figure1_90='1,1/0,1/0,1';
+var figure2= '1,1,0/0,1,1';
+var figure2_90= '0,1/1,1/1,0';
+var figure3= '1,1,1,1';
+var figure3_90= '1/1/1/1';
+var figure4= '1,1/1,1';
+var figure4_90= '1,1/1,1';
 
 function ajouterPiece(str){
 var arrayOfStrings1 =str.split('/');
 var tetri=$('<div/>');
 tetri.addClass('tetri');
 tetri.addClass('current');
+tetri.attr('name',str);
 $('div.plateau').append(tetri);
 for(var i=0;i<arrayOfStrings1.length;i++){
   arraysOfStrings2=arrayOfStrings1[i].split(',');
@@ -48,18 +55,18 @@ $(document).ready(function(){
 
         switch (keyCode) {
             case arrow.left:
-                if(document.querySelector('div.current').offsetLeft>00){
+                if(document.querySelector('div.current').offsetLeft>=50){
                     $('div.current').css({"left": "-=50px"},'fast');
                 }
 
             break;
             case arrow.right:
-              if(document.querySelector('div.current').offsetLeft <$('div.plateaucomplet').width()-$('div.current').width()){
+              if(document.querySelector('div.current').offsetLeft <$('div.plateau').width()-$('div.current').width()){
                 $('div.current').css({"left": "+=50px"},'fast');
               }
             break;
             case arrow.down:
-              if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
+              if(document.querySelector('div.current').offsetTop <$('div.plateau').height()-$('div.current').height()){
                 $('div.current').css({"bottom": "-=50px"},'fast');
               }
             break;
@@ -67,15 +74,76 @@ $(document).ready(function(){
               var left =document.querySelector('div.current').offsetLeft;
               var top =document.querySelector('div.current').offsetTop;
 
-              $('div.current').addClass('none')
+              var name = $('div.current').attr('name');
 
-              $('div.current').removeClass('current');
-              $('div.tetri').replaceWith(ajouterPiece(figure1_90));
+              if($('div.current').attr('name')==figure1){
+                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
+                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
+                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
+                  $('div.current').css({"left": "-="+diff+"px"},'fast');
+                  $('div.current').replaceWith(ajouterPiece(figure1_90));
+
+
+                }
+                else  {
+                  $('div.current').replaceWith(ajouterPiece(figure1_90));
+                  $('div.current')[0].offsetLeft=left;
+                  $('div.current')[0].offsetTop=top;
+                }
+              }
+              else if($('div.current').attr('name')==figure1_90) {
+
+                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
+                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
+                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
+
+                  $('div.current').replaceWith(ajouterPiece(figure1));
+                  $('div.current').css({"left": "-="+diff+"px"},'fast');
+
+                }
+                else  {
+                  $('div.current').replaceWith(ajouterPiece(figure1));
+                  $('div.current')[0].offsetLeft=left;
+                  $('div.current')[0].offsetTop=top;
+                }
+              }
+
 
 
               $('div.current').css({"left": "+="+left+"px"},'fast');
               $('div.current').css({"bottom": "-="+top+"px"},'fast');
+              var diff=$('div.plateau').height()-$('div.current').height()-document.querySelector('div.current').offsetTop;
+              if(document.querySelector('div.current').offsetTop>$('div.plateau').height()-$('div.current').height()){
+                $('div.current').css({"top": "+="+diff+"px"},'fast');
+              }
+
 
         }
     });
 });
+
+var compteur=0;
+window.onload = function()
+{
+  setInterval(function()
+  {
+    if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
+      $('div.current').css({"bottom": "-=50px"},'fast');
+    }
+    else {
+      $('div.current').removeClass('current');
+
+      aleatoire();
+      compteur++;
+      console.log(compteur); }
+  }, 1000);
+}
+function aleatoire() {
+  var chiffre= Math.floor((Math.random() * 4  ) + 1);
+  switch (chiffre) {
+    case 1: ajouterPiece(figure1); break;
+    case 2: ajouterPiece(figure2); break;
+    case 3: ajouterPiece(figure3); break;
+    case 4: ajouterPiece(figure4); break;
+  }
+}
