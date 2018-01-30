@@ -400,5 +400,14 @@ input[type="checkbox"]:checked+label+.menu{
   position: absolute;
   display:inline-block;
 
-  
+
+
+}
+
+.current{
+
+}
+
+.none{
+  display:none;
 }
