@@ -45,7 +45,7 @@
 .tetrimino{
   position:relative;
   height:100px;
-  width:150px;
+
   top:50%;
   left:40%;
 
@@ -61,12 +61,7 @@
 
 }
 
-.ligne2 {
-  position: relative;
-  height:50px;
-  width:150px;
 
-}
 
 #i1,#i2,#i3 {
   position:relative;
@@ -136,15 +131,18 @@ h1{
 }
 .piecesuivante{
   position:relative;
-  top:20px;
-  left:45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:60%;
+  width: 100%;
 }
 
 .score{
   position:relative;
 
   font-size:40px;
-  top:40px;
+
   left:68px;
   font-family: monospace;
   color:#2A0E0E;
@@ -411,4 +409,47 @@ input[type="checkbox"]:checked+label+.menu{
 
 .none{
   display:none;
+}
+
+.poule2{
+  background-image: url(poulecarre.png);
+  background-size: 100% 100%;
+  /* background-color: red; */
+  position:relative;
+  float:left;
+  height:30px;
+  width:30px;
+
+}
+
+.ligne2{
+  height: 30px;
+}
+
+.vide2{
+  /* background-image: url(poulecarre.png); */
+  position:relative;
+  float:left;
+  height:30px;
+  width:30px;
+
+}
+
+.prochaine{
+
+}
+.livescore .tetri{
+  position:relative;
+}
+.vide3{
+ position:relative;
+ float:left;
+ height:50px;
+ width:50px;
+ border-color: black;
+ background-color: green;
+}
+
+.grille{
+  position:absolute;
 }
