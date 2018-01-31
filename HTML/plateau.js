@@ -1,18 +1,39 @@
-var figure1= '1,1,1/1,0,0';
-var figure1_90='1,1/0,1/0,1';
-var figure2= '1,1,0/0,1,1';
-var figure2_90= '0,1/1,1/1,0';
-var figure3= '1,1,1,1';
-var figure3_90= '1/1/1/1';
-var figure4= '1,1/1,1';
-var figure4_90= '1,1/1,1';
+var figure1= {f00:'1,1,1/1,0,0',
+f90: '1,1/0,1/0,1',
+f180:'0,0,1/1,1,1',
+f270: '1,0/1,0/1,1'}
 
-function ajouterPiece(str){
-var arrayOfStrings1 =str.split('/');
+var figure2= {f00:'1,1,0/0,1,1',
+f90: '0,1/1,1/1,0',
+f180:'1,1,0/0,1,1',
+f270: '0,1/1,1/1,0'}
+// var figure1_90='1,1/0,1/0,1';
+// var figure2= '1,1,0/0,1,1';
+// var figure2_90= '0,1/1,1/1,0';
+var figure3= {f00:'1,1,1,1',
+f90: '1/1/1/1',
+f180:'1,1,1,1',
+f270: '1/1/1/1'}
+// var figure3= '1,1,1,1';
+// var figure3_90= '1/1/1/1';
+var figure4= {f00:'1,1/1,1',
+f90: '1,1/1,1',
+f180:'1,1/1,1',
+f270: '1,1/1,1'}
+// var figure4= '1,1/1,1';
+// var figure4_90= '1,1/1,1';
+
+var compteur=0;
+
+function ajouterPiece(figure){
+var tab = [];
+tab= [figure.f00,figure.f90,figure.f180,figure.f270];
+var arrayOfStrings1 =tab[compteur].split('/');
 var tetri=$('<div/>');
 tetri.addClass('tetri');
 tetri.addClass('current');
-tetri.attr('name',str);
+tetri.data('name',figure);
+tetri.attr('compteur', compteur);
 $('div.plateau').append(tetri);
 for(var i=0;i<arrayOfStrings1.length;i++){
   arraysOfStrings2=arrayOfStrings1[i].split(',');
@@ -34,7 +55,39 @@ for(var i=0;i<arrayOfStrings1.length;i++){
   }
 };
 }
-ajouterPiece(figure1);
+ajouterPiece(figure2);
+aleatoire();
+
+function ajouterPiece2(figure){
+var tab = [];
+tab= [figure.f00,figure.f90,figure.f180,figure.f270];
+var arrayOfStrings1 =tab[compteur].split('/');
+var tetri=$('<div/>');
+tetri.addClass('tetri');
+tetri.addClass('prochaine');
+tetri.data('name',figure);
+tetri.attr('compteur', compteur);
+$('div.piecesuivante').append(tetri);
+for(var i=0;i<arrayOfStrings1.length;i++){
+  arraysOfStrings2=arrayOfStrings1[i].split(',');
+  var ligne=$('<div/>');
+  ligne.addClass('ligne2');
+  tetri.append(ligne);
+  for(var j=0; j<arraysOfStrings2.length;j++){
+    var str1 =arraysOfStrings2[j];
+    var case1 = $('<div/>');
+    ligne.append(case1);
+    if (str1==1) {
+      case1.addClass('poule2');
+    }
+    if (str1==0){
+      case1.addClass('vide2');
+    }
+
+
+  }
+};
+}
 
 var tab = document.querySelectorAll('div.ligne');
 console.log(tab);
@@ -74,35 +127,74 @@ $(document).ready(function(){
               var left =document.querySelector('div.current').offsetLeft;
               var top =document.querySelector('div.current').offsetTop;
 
-              var name = $('div.current').attr('name');
+              var name = $('div.current').data('name');
+              var compteur1=$('div.current').attr('compteur');
 
-              if($('div.current').attr('name')==figure1){
+              if(compteur1==0){
                 if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
                 && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
                   var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
                   $('div.current').css({"left": "-="+diff+"px"},'fast');
-                  $('div.current').replaceWith(ajouterPiece(figure1_90));
+                  compteur=1;
+                  $('div.current').replaceWith(ajouterPiece(name));
 
 
                 }
                 else  {
-                  $('div.current').replaceWith(ajouterPiece(figure1_90));
+                  compteur=1;
+                  $('div.current').replaceWith(ajouterPiece(name));
                   $('div.current')[0].offsetLeft=left;
                   $('div.current')[0].offsetTop=top;
                 }
               }
-              else if($('div.current').attr('name')==figure1_90) {
+              else if(compteur1==1) {
 
                 if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
                 && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
                   var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
-
-                  $('div.current').replaceWith(ajouterPiece(figure1));
+                  compteur=2;
+                  $('div.current').replaceWith(ajouterPiece(name));
                   $('div.current').css({"left": "-="+diff+"px"},'fast');
 
                 }
                 else  {
-                  $('div.current').replaceWith(ajouterPiece(figure1));
+                  compteur=2;
+                  $('div.current').replaceWith(ajouterPiece(name));
+                  $('div.current')[0].offsetLeft=left;
+                  $('div.current')[0].offsetTop=top;
+                }
+              }
+              else if(compteur1==2) {
+
+                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
+                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
+                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
+                  compteur=3;
+                  $('div.current').replaceWith(ajouterPiece(name));
+                  $('div.current').css({"left": "-="+diff+"px"},'fast');
+
+                }
+                else  {
+                  compteur=3;
+                  $('div.current').replaceWith(ajouterPiece(name));
+                  $('div.current')[0].offsetLeft=left;
+                  $('div.current')[0].offsetTop=top;
+                }
+              }
+
+              else if(compteur1==3) {
+
+                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
+                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
+                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
+                  compteur=0;
+                  $('div.current').replaceWith(ajouterPiece(name));
+                  $('div.current').css({"left": "-="+diff+"px"},'fast');
+
+                }
+                else  {
+                  compteur=0;
+                  $('div.current').replaceWith(ajouterPiece(name));
                   $('div.current')[0].offsetLeft=left;
                   $('div.current')[0].offsetTop=top;
                 }
@@ -122,7 +214,7 @@ $(document).ready(function(){
     });
 });
 
-var compteur=0;
+var compteur2=0;
 window.onload = function()
 {
   setInterval(function()
@@ -132,18 +224,19 @@ window.onload = function()
     }
     else {
       $('div.current').removeClass('current');
-
+      var name2=$('div.prochaine').data('name');
+      ajouterPiece($('div.prochaine').data('name'));
       aleatoire();
-      compteur++;
+      compteur2++;
       console.log(compteur); }
   }, 1000);
 }
 function aleatoire() {
   var chiffre= Math.floor((Math.random() * 4  ) + 1);
   switch (chiffre) {
-    case 1: ajouterPiece(figure1); break;
-    case 2: ajouterPiece(figure2); break;
-    case 3: ajouterPiece(figure3); break;
-    case 4: ajouterPiece(figure4); break;
+    case 1: $('div.prochaine').replaceWith(ajouterPiece2(figure1)); break;
+    case 2: $('div.prochaine').replaceWith(ajouterPiece2(figure2)); break;
+    case 3: $('div.prochaine').replaceWith(ajouterPiece2(figure3)); break;
+    case 4: $('div.prochaine').replaceWith(ajouterPiece2(figure4)); break;
   }
 }
