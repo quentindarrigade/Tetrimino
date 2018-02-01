@@ -1,3 +1,22 @@
+var plateau=[
+[0,0,0,0,1,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0]
+];
+var x=0;
+var y=0;
+
 var figure1= {f00:'1,1,1/1,0,0',
 f90: '1,1/0,1/0,1',
 f180:'0,0,1/1,1,1',
@@ -24,24 +43,26 @@ f270: '1,1/1,1'}
 // var figure4_90= '1,1/1,1';
 
 var compteur=0;
+var tetriMatrix=new Array();
 
 function ajouterPiece(figure){
 var tab = [];
 tab= [figure.f00,figure.f90,figure.f180,figure.f270];
-var arrayOfStrings1 =tab[compteur].split('/');
+var arrayLigne =tab[compteur].split('/');
 var tetri=$('<div/>');
 tetri.addClass('tetri');
 tetri.addClass('current');
 tetri.data('name',figure);
 tetri.attr('compteur', compteur);
 $('div.plateau').append(tetri);
-for(var i=0;i<arrayOfStrings1.length;i++){
-  arraysOfStrings2=arrayOfStrings1[i].split(',');
+for(var i=0;i<arrayLigne.length;i++){
+  var arrayColonne=arrayLigne[i].split(',');
+  tetriMatrix.push(arrayColonne);
   var ligne=$('<div/>');
   ligne.addClass('ligne');
   tetri.append(ligne);
-  for(var j=0; j<arraysOfStrings2.length;j++){
-    var str1 =arraysOfStrings2[j];
+  for(var j=0; j<arrayColonne.length;j++){
+    var str1 =arrayColonne[j];
     var case1 = $('<div/>');
     ligne.append(case1);
     if (str1==1) {
@@ -54,9 +75,27 @@ for(var i=0;i<arrayOfStrings1.length;i++){
 
   }
 };
+movePlateau();
 }
 ajouterPiece(figure2);
-aleatoire();
+console.log(tetriMatrix);
+function movePlateau(){
+  for (var j =0; j<tetriMatrix.length;j++){
+    for (var i=0; i<tetriMatrix[j].length-1;i++){
+          plateau[j+x][i+y]=parseInt(tetriMatrix[j][i]);
+      }
+    if(plateau[j+x][tetriMatrix[j].length+y]!=1){
+      plateau[j+x][tetriMatrix[j].length+y-1]=parseInt(tetriMatrix[j][tetriMatrix[j].length]);
+    }
+
+    }
+
+  }
+
+
+console.log(plateau);
+
+// aleatoire();
 
 function ajouterPiece2(figure){
 var tab = [];
@@ -110,12 +149,29 @@ $(document).ready(function(){
             case arrow.left:
                 if(document.querySelector('div.current').offsetLeft>=50){
                     $('div.current').css({"left": "-=50px"},'fast');
+
                 }
 
             break;
             case arrow.right:
               if(document.querySelector('div.current').offsetLeft <$('div.plateau').width()-$('div.current').width()){
+
+                var bool=true;
+                for (var i=0; i<tetriMatrix.length;i++){
+                  if(plateau[i+x][tetriMatrix[i].length+y]==1 && plateau[i+x][tetriMatrix[i].length+y-1]==1){
+                    bool=false;
+                  }
+              }
+              if(bool==true){
+                y+=1;
+                movePlateau();
                 $('div.current').css({"left": "+=50px"},'fast');
+
+                for(var i =0;i<tetriMatrix.length;i++){
+                  plateau[i+x][y-1]=0;
+                }
+              }
+
               }
             break;
             case arrow.down:
@@ -214,29 +270,29 @@ $(document).ready(function(){
     });
 });
 
-var compteur2=0;
-window.onload = function()
-{
-  setInterval(function()
-  {
-    if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
-      $('div.current').css({"bottom": "-=50px"},'fast');
-    }
-    else {
-      $('div.current').removeClass('current');
-      var name2=$('div.prochaine').data('name');
-      ajouterPiece($('div.prochaine').data('name'));
-      aleatoire();
-      compteur2++;
-      console.log(compteur); }
-  }, 1000);
-}
-function aleatoire() {
-  var chiffre= Math.floor((Math.random() * 4  ) + 1);
-  switch (chiffre) {
-    case 1: $('div.prochaine').replaceWith(ajouterPiece2(figure1)); break;
-    case 2: $('div.prochaine').replaceWith(ajouterPiece2(figure2)); break;
-    case 3: $('div.prochaine').replaceWith(ajouterPiece2(figure3)); break;
-    case 4: $('div.prochaine').replaceWith(ajouterPiece2(figure4)); break;
-  }
-}
+// var compteur2=0;
+// window.onload = function()
+// {
+//   setInterval(function()
+//   {
+//     if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
+//       $('div.current').css({"bottom": "-=50px"},'fast');
+//     }
+//     else {
+//       $('div.current').removeClass('current');
+//       var name2=$('div.prochaine').data('name');
+//       ajouterPiece($('div.prochaine').data('name'));
+//       aleatoire();
+//       compteur2++;
+//       console.log(compteur); }
+//   }, 1000);
+// }
+// function aleatoire() {
+//   var chiffre= Math.floor((Math.random() * 4  ) + 1);
+//   switch (chiffre) {
+//     case 1: $('div.prochaine').replaceWith(ajouterPiece2(figure1)); break;
+//     case 2: $('div.prochaine').replaceWith(ajouterPiece2(figure2)); break;
+//     case 3: $('div.prochaine').replaceWith(ajouterPiece2(figure3)); break;
+//     case 4: $('div.prochaine').replaceWith(ajouterPiece2(figure4)); break;
+//   }
+// }
