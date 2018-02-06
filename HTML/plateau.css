@@ -43,7 +43,7 @@
 }
 
 .tetrimino{
-  position:relative;
+  position:absolute;
   height:100px;
 
   top:50%;
@@ -89,7 +89,7 @@
 .livescore {
   position:relative;
   float:left;
-  height:200px;
+  height:250px;
   width:200px;
   border-style: solid;
   border-color: black;
@@ -138,17 +138,37 @@ h1{
   width: 100%;
 }
 
-.score{
-  position:relative;
-
-  font-size:40px;
-
-  left:68px;
-  font-family: monospace;
-  color:#2A0E0E;
-
-
+.score {
+  position: relative;
+float: left;
+display: flex;
+flex-direction: column;
+align-items: center;
+min-width: 160px;
+min-height: 38px;
+border: solid 1px black;
+margin-left: 20px;
+font-family: "Orbitron";
+color: black;
+font-size: 30px;
+top: 10px;
 }
+
+.score > span {
+	font-size: 60px;
+}
+
+.score > .nexts {
+	width: 100%;
+	height: 100%;
+}
+
+
+.score > small {
+	font-size: 12px;
+	padding: 5px;
+}
+
 
 body{
   background-image: url(planche.jpg);
@@ -373,11 +393,11 @@ input[type="checkbox"]:checked+label+.menu{
 .leaderboard:hover{
   transform: scale(1.2);
 }
-.poule{
+.bloc{
   background-image: url(poulecarre.png);
   background-size: 100% 100%;
   /* background-color: red; */
-  position:relative;
+  position:absolute;
   float:left;
   height:50px;
   width:50px;
@@ -450,6 +470,20 @@ input[type="checkbox"]:checked+label+.menu{
  background-color: green;
 }
 
-.grille{
-  position:absolute;
+.piecesuivante {
+  transform: scale(0.7);
+}
+
+.next {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	padding: 10px 0;
+  left: -52px;
+top: -85px;
+position: relative;
+	border-bottom: solid 1px #AAA;
+}
+.piecesuivante .tetrimino {
+
 }
