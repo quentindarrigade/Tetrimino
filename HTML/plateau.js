@@ -1,298 +1,201 @@
-var plateau=[
-[0,0,0,0,1,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0]
-];
-var x=0;
-var y=0;
+(function() {
+	try {
+		var myRemovedTimeoutAnimationDuration = 250;
+		var myTetris = new Tetris({
+			hauteur: 14,
+			largeur: 8,
+			sizeOfBloc: 50,
+			tetriminos: tetriminos
+		});
 
-var figure1= {f00:'1,1,1/1,0,0',
-f90: '1,1/0,1/0,1',
-f180:'0,0,1/1,1,1',
-f270: '1,0/1,0/1,1'}
+		//On charge tetrisAuto, tetrisGhost, tetrisScore et tetrisNext s'ils sont disponibles
+		try { var myTetrisAuto = new TetrisAuto(myTetris, 1000); } catch (e) { };
+		try { var myTetrisGhost = new TetrisGhost(myTetris); } catch (e) { };
+		try { var myTetrisScore = new TetrisScore(myTetris); } catch (e) { };
+		try { var myTetrisNext = new TetrisNext(myTetris, 1); } catch (e) { };
+	}
 
-var figure2= {f00:'1,1,0/0,1,1',
-f90: '0,1/1,1/1,0',
-f180:'1,1,0/0,1,1',
-f270: '0,1/1,1/1,0'}
-// var figure1_90='1,1/0,1/0,1';
-// var figure2= '1,1,0/0,1,1';
-// var figure2_90= '0,1/1,1/1,0';
-var figure3= {f00:'1,1,1,1',
-f90: '1/1/1/1',
-f180:'1,1,1,1',
-f270: '1/1/1/1'}
-// var figure3= '1,1,1,1';
-// var figure3_90= '1/1/1/1';
-var figure4= {f00:'1,1/1,1',
-f90: '1,1/1,1',
-f180:'1,1/1,1',
-f270: '1,1/1,1'}
-// var figure4= '1,1/1,1';
-// var figure4_90= '1,1/1,1';
-
-var compteur=0;
-var tetriMatrix=new Array();
-
-function ajouterPiece(figure){
-var tab = [];
-tab= [figure.f00,figure.f90,figure.f180,figure.f270];
-var arrayLigne =tab[compteur].split('/');
-var tetri=$('<div/>');
-tetri.addClass('tetri');
-tetri.addClass('current');
-tetri.data('name',figure);
-tetri.attr('compteur', compteur);
-$('div.plateau').append(tetri);
-for(var i=0;i<arrayLigne.length;i++){
-  var arrayColonne=arrayLigne[i].split(',');
-  tetriMatrix.push(arrayColonne);
-  var ligne=$('<div/>');
-  ligne.addClass('ligne');
-  tetri.append(ligne);
-  for(var j=0; j<arrayColonne.length;j++){
-    var str1 =arrayColonne[j];
-    var case1 = $('<div/>');
-    ligne.append(case1);
-    if (str1==1) {
-      case1.addClass('poule');
-    }
-    if (str1==0){
-      case1.addClass('vide');
-    }
-
-
-  }
-};
-movePlateau();
-}
-ajouterPiece(figure2);
-console.log(tetriMatrix);
-function movePlateau(){
-  for (var j =0; j<tetriMatrix.length;j++){
-    for (var i=0; i<tetriMatrix[j].length-1;i++){
-          plateau[j+x][i+y]=parseInt(tetriMatrix[j][i]);
-      }
-    if(plateau[j+x][tetriMatrix[j].length+y]!=1){
-      plateau[j+x][tetriMatrix[j].length+y-1]=parseInt(tetriMatrix[j][tetriMatrix[j].length]);
-    }
-
-    }
-
-  }
-
-
-console.log(plateau);
-
-// aleatoire();
-
-function ajouterPiece2(figure){
-var tab = [];
-tab= [figure.f00,figure.f90,figure.f180,figure.f270];
-var arrayOfStrings1 =tab[compteur].split('/');
-var tetri=$('<div/>');
-tetri.addClass('tetri');
-tetri.addClass('prochaine');
-tetri.data('name',figure);
-tetri.attr('compteur', compteur);
-$('div.piecesuivante').append(tetri);
-for(var i=0;i<arrayOfStrings1.length;i++){
-  arraysOfStrings2=arrayOfStrings1[i].split(',');
-  var ligne=$('<div/>');
-  ligne.addClass('ligne2');
-  tetri.append(ligne);
-  for(var j=0; j<arraysOfStrings2.length;j++){
-    var str1 =arraysOfStrings2[j];
-    var case1 = $('<div/>');
-    ligne.append(case1);
-    if (str1==1) {
-      case1.addClass('poule2');
-    }
-    if (str1==0){
-      case1.addClass('vide2');
-    }
-
-
-  }
-};
-}
-
-var tab = document.querySelectorAll('div.ligne');
-console.log(tab);
-var ligne=tab[tab.length-1];
-console.log(typeof ligne);
-
-var top2 =ligne.offsetTop;
-
-console.log(top2  );
+	catch (e) {
+		alert(e);
+		return;
+	};
 
 
 
 
-$(document).ready(function(){
-    $(document).keydown(function (e) {
-        var keyCode = e.keyCode || e.which,
-        arrow = {left: 37, up: 38, right: 39, down: 40 };
+	/*
+	 * Lance un nouveau tetrimino
+	 * Ce n'est pas Tetris qui gère les suivants
+	 */
+	function pull() {
+		$('.plateau').append( //On ajoute au plateau le tetrimino
+			(myTetrisNext) ? //Si le tetrimino "à suivre" est actif
+				myTetrisNext.apply() : //On applique le tetrimino à suivre
+				myTetris.apply() //Sinon, on demande d'appliquer un nouveau tetrimino
+		);
 
-        switch (keyCode) {
-            case arrow.left:
-                if(document.querySelector('div.current').offsetLeft>=50){
-                    $('div.current').css({"left": "-=50px"},'fast');
+		//Si le fantôme est actif
+		if (myTetrisGhost) myTetrisGhost.update();
 
-                }
-
-            break;
-            case arrow.right:
-              if(document.querySelector('div.current').offsetLeft <$('div.plateau').width()-$('div.current').width()){
-
-                var bool=true;
-                for (var i=0; i<tetriMatrix.length;i++){
-                  if(plateau[i+x][tetriMatrix[i].length+y]==1 && plateau[i+x][tetriMatrix[i].length+y-1]==1){
-                    bool=false;
-                  }
-              }
-              if(bool==true){
-                y+=1;
-                movePlateau();
-                $('div.current').css({"left": "+=50px"},'fast');
-
-                for(var i =0;i<tetriMatrix.length;i++){
-                  plateau[i+x][y-1]=0;
-                }
-              }
-
-              }
-            break;
-            case arrow.down:
-              if(document.querySelector('div.current').offsetTop <$('div.plateau').height()-$('div.current').height()){
-                $('div.current').css({"bottom": "-=50px"},'fast');
-              }
-            break;
-            case arrow.up:
-              var left =document.querySelector('div.current').offsetLeft;
-              var top =document.querySelector('div.current').offsetTop;
-
-              var name = $('div.current').data('name');
-              var compteur1=$('div.current').attr('compteur');
-
-              if(compteur1==0){
-                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
-                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
-                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
-                  $('div.current').css({"left": "-="+diff+"px"},'fast');
-                  compteur=1;
-                  $('div.current').replaceWith(ajouterPiece(name));
-
-
-                }
-                else  {
-                  compteur=1;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current')[0].offsetLeft=left;
-                  $('div.current')[0].offsetTop=top;
-                }
-              }
-              else if(compteur1==1) {
-
-                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
-                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
-                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
-                  compteur=2;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current').css({"left": "-="+diff+"px"},'fast');
-
-                }
-                else  {
-                  compteur=2;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current')[0].offsetLeft=left;
-                  $('div.current')[0].offsetTop=top;
-                }
-              }
-              else if(compteur1==2) {
-
-                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
-                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
-                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
-                  compteur=3;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current').css({"left": "-="+diff+"px"},'fast');
-
-                }
-                else  {
-                  compteur=3;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current')[0].offsetLeft=left;
-                  $('div.current')[0].offsetTop=top;
-                }
-              }
-
-              else if(compteur1==3) {
-
-                if($('div.current')[0].offsetLeft==($('div.plateau')[0].offsetWidth-$('div.current')[0].offsetWidth)
-                && ($('div.current')[0].offsetHeight>$('div.current')[0].offsetWidth)) {
-                  var diff=$('div.current')[0].offsetHeight-$('div.current')[0].offsetWidth;
-                  compteur=0;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current').css({"left": "-="+diff+"px"},'fast');
-
-                }
-                else  {
-                  compteur=0;
-                  $('div.current').replaceWith(ajouterPiece(name));
-                  $('div.current')[0].offsetLeft=left;
-                  $('div.current')[0].offsetTop=top;
-                }
-              }
+		//Si le tetris automatisé est actif
+		if (myTetrisAuto) myTetrisAuto.start((myTetrisScore) ? (1000 / myTetrisScore.level) : 1000);
+	}
 
 
 
-              $('div.current').css({"left": "+="+left+"px"},'fast');
-              $('div.current').css({"bottom": "-="+top+"px"},'fast');
-              var diff=$('div.plateau').height()-$('div.current').height()-document.querySelector('div.current').offsetTop;
-              if(document.querySelector('div.current').offsetTop>$('div.plateau').height()-$('div.current').height()){
-                $('div.current').css({"top": "+="+diff+"px"},'fast');
-              }
+	/*
+	 * Interception des touches
+	 */
+	$(document).on('keydown', function(e) {
+		var isPrevent = true;
+
+		switch (e.which || e.keyCode) {
+			case 13: myTetris.pause(); break;
+			case 37: myTetris.moveToLeft(); break;
+			case 38: myTetris.changeFigure(); break;
+			case 39: myTetris.moveToRight(); break;
+			case 40: myTetris.moveToBottom(); break;
+			case 32: if (myTetrisGhost) myTetrisGhost.put(); break;
+			default: isPrevent = false; break;
+		}
+
+		//Si prevent est actif, on empêche le comportement du navigateur par défaut de s'exécuter
+		if (isPrevent) {
+			e.preventDefault();
+		}
+	});
 
 
-        }
-    });
-});
 
-// var compteur2=0;
-// window.onload = function()
-// {
-//   setInterval(function()
-//   {
-//     if(document.querySelector('div.current').offsetTop <$('div.plateaucomplet').height()-$('div.current').height()){
-//       $('div.current').css({"bottom": "-=50px"},'fast');
-//     }
-//     else {
-//       $('div.current').removeClass('current');
-//       var name2=$('div.prochaine').data('name');
-//       ajouterPiece($('div.prochaine').data('name'));
-//       aleatoire();
-//       compteur2++;
-//       console.log(compteur); }
-//   }, 1000);
-// }
-// function aleatoire() {
-//   var chiffre= Math.floor((Math.random() * 4  ) + 1);
-//   switch (chiffre) {
-//     case 1: $('div.prochaine').replaceWith(ajouterPiece2(figure1)); break;
-//     case 2: $('div.prochaine').replaceWith(ajouterPiece2(figure2)); break;
-//     case 3: $('div.prochaine').replaceWith(ajouterPiece2(figure3)); break;
-//     case 4: $('div.prochaine').replaceWith(ajouterPiece2(figure4)); break;
-//   }
-// }
+	/*
+	 * Interception d'un coup joué
+	 */
+	$(myTetris).on('hitPlayed', function(e, hit) {
+		hit.tetrimino.css('top', (hit.y * hit.sizeOfBloc) + 'px');
+		hit.tetrimino.css('left', (hit.x * hit.sizeOfBloc) + 'px');
+	});
+
+
+
+
+
+	/*
+	 * Interception d'un tetrimino placé
+	 */
+	$(myTetris).on('tetriminoPut', function(e, tetrimino, sizeOfBloc, blocPositions) {
+		//Pour chaque bloc du tetrimino
+		for (let blocPosition of blocPositions) {
+			//On clone un bloc
+			var myBloc = tetrimino.find('.bloc:nth-child(1)').clone();
+
+			//On sauvegarde sur quelle ligne il est positionné
+			myBloc.attr('data-ligne', blocPosition.y);
+
+			//On récupère sa position sur le plateau (top et left) et sa couleur
+			myBloc.css('background', tetrimino.find('.bloc:nth-child(1)').css('background'));
+			myBloc.css('top', (blocPosition.y * sizeOfBloc));
+			myBloc.css('left', (blocPosition.x * sizeOfBloc));
+
+			//On le place sur le plateau
+			$('.plateau').append(myBloc);
+		};
+
+		//On supprime le tetrimino (et ses blocs par conséquent !)
+		$('.plateau .tetrimino').remove();
+
+		//On relance un nouveau coup
+		pull();
+	});
+
+
+
+	/*
+	 * Interception d'une (ou plusieurs) ligne(s) complétée(s)
+	 */
+	$(myTetris).on('rowsCompleted', function(e, sizeOfBloc, completedRows) {
+		//A tous les blocs à supprimer, on leur ajoute la classe "removing"
+		completedRows.forEach(function(row) {
+			$('.bloc[data-ligne="' + row + '"]').addClass('removing');
+		});
+
+
+		//On applique un laps de temps avant de supprimer, pour l'effet visuel
+		setTimeout(function() {
+			//On supprime chaque ligne à supprimer
+			for (let row of completedRows) {
+				$('.bloc[data-ligne="' + row + '"]').remove(); //Paf, ligne supprimée
+
+				//On oublie pas d'incrémenter l'index des lignes des blocs restant (on a supprimé une ligne !)
+				for (var i = row + 1; i > 0; i--) {
+					//On récupère les blocs de la ligne d'avant
+					$('.bloc[data-ligne="' + (i - 1) + '"]').each(function() {
+						$(this).attr('data-ligne', i); //On donne le nouvel indice
+						$(this).css('top', (i * sizeOfBloc)); //Et puis on le déplace visuellement !
+					});
+				}
+			};
+
+			//On force la mise à jour du fantôme, si le plugin est actif
+			if (myTetrisGhost) myTetrisGhost.update();
+		}, myRemovedTimeoutAnimationDuration);
+	});
+
+
+
+	/*
+	 * Interception de la pause
+	 */
+	$(myTetris).on('paused', function(e, paused) {
+		console.log((paused) ? "TETRIS EN PAUSE" : "REPRISE DU TETRIS");
+	});
+
+
+
+	/*
+	 * Interception d'un Game Over
+	 */
+	$(myTetris).on('gameOver', function() {
+		console.log("GAME OVER :'(");
+	});
+
+
+
+	/*
+	 * Interception d'un fantôme créé
+	 */
+	if (myTetrisGhost) {
+		$(myTetrisGhost).on('ghostCreated', function(e, ghost) {
+			//On ajoute le fantôme au plateau
+			$('.plateau').append(this.ghostTetrimino);
+		});
+	}
+
+
+	/*
+	 * Interception d'une modification du score
+	 */
+	if (myTetrisScore) {
+		$(myTetrisScore).on('scoring', function() {
+			//On change les scores sur le tableau des scores
+			$('.livescore .score').html(myTetrisScore.points);
+		});
+	}
+
+
+	/*
+	 * Interception de la nouvelle liste du ou des tetrimino(s) à suivre
+	 */
+	if (myTetrisNext) {
+		$(myTetrisNext).on('nextUpdated', function(e, nextTetriminos) {
+			$('.livescore > .piecesuivante').children().remove();
+
+			for (let next of nextTetriminos) {
+				$('.livescore > .piecesuivante').append(next);
+			}
+		});
+	}
+
+
+	//On démarre le jeu au démarrage directement après le chargement de la page
+	pull();
+})();
