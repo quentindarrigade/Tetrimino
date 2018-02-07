@@ -11,3 +11,8 @@ dao/src/main/java/config/daoTest\.java
 test/src/test/java/dao/IJoueurDAOTest\.java
 
 test/src/test/java/dao/ITetriminoDAOTest\.java
+
+dao/\.settings/
+model/\.settings/
+test/\.settings/
+web/\.settings/
