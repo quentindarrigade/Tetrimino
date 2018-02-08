@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,15 +21,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class ModelFAQ {
+	@Override
+	public String toString() {
+		return "ModelFAQ [id=" + id + ", questions=" + questions + ", reponses=" + reponses + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FAQ_ID")
 	private int id;
 	
 	@Column(name = "FAQ_QUE")
+	@NotEmpty(message = "Tu as oublié de rentrer la question!!")
+	@Size(max=50)
 	private String questions;
 	
 	@Column(name = "FAQ_REP")
+	@NotEmpty(message = "Ba alors? Y'a pas de réponses?")
 	private String reponses;
 	
 	@ManyToOne
