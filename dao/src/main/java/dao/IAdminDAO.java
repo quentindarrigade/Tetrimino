@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 
 import model.ModelAdmin;
 
+
 public interface IAdminDAO extends JpaRepository< ModelAdmin, Integer> {
 	
 	

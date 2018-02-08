@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/web/css/bootstrap.min.css" />
 </head>
 <body>
 
@@ -18,8 +18,8 @@
 <div class="container mb-3">
 <tiles:insertAttribute name="content" />
 </div>
-<script src="../js/jquery-3.3.1.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootsrap.min.js"></script>
+<script src="/web/js/jquery-3.3.1.js"></script>
+	<script src="/web/js/popper.min.js"></script>
+	<script src="/web/js/bootsrap.min.js"></script>
 </body>
 </html>
