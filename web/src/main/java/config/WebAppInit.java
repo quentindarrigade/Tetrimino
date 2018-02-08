@@ -15,23 +15,23 @@ public class WebAppInit implements WebApplicationInitializer{
 		//Déclaration des classes de configuration
 		AnnotationConfigWebApplicationContext myContext = new AnnotationConfigWebApplicationContext();
 		AnnotationConfigWebApplicationContext myWebContext = new AnnotationConfigWebApplicationContext();
-//		AnnotationConfigWebApplicationContext myApiContext = new AnnotationConfigWebApplicationContext();
+		AnnotationConfigWebApplicationContext myApiContext = new AnnotationConfigWebApplicationContext();
 		
 		myContext.register(AppConfig.class);
 		myWebContext.register(WebConfig.class);
-//		myApiContext.register(ApiConfig.class);
+		myApiContext.register(ApiConfig.class);
 		
 		//Déclaration de l'écouteur Spring pour charger le context
 		container.addListener(new ContextLoaderListener(myContext));
 		
 		//Déclaration de la Servlet DispatcherServlet
-//		DispatcherServlet apiServlet = new DispatcherServlet(myApiContext);
-//		ServletRegistration.Dynamic api = container.addServlet("api", apiServlet);
+		DispatcherServlet apiServlet = new DispatcherServlet(myApiContext);
+		ServletRegistration.Dynamic api = container.addServlet("api", apiServlet);
 		DispatcherServlet dispatcherServlet = new DispatcherServlet(myWebContext);
 		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
-//		api.addMapping("/api/*");
-//		api.setLoadOnStartup(2);
+		api.addMapping("/api/*");
+		api.setLoadOnStartup(2);
 	}
 }

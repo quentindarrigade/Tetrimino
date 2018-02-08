@@ -8,6 +8,9 @@
 				
 				<a href="/web/faq" class="btn btn-primary" >FAQ  </a>
 				<a href="/web/tetriminos/liste" class="btn btn-primary" >Pièces  </a>
+				
+				<a href="/web/deconnecter"><button type="button"
+						class="btn btn-success">Se déconnecter</button></a>
 			
 		</tiles:putAttribute>
 	</tiles:insertDefinition>

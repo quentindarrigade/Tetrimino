@@ -37,8 +37,13 @@ public class ConnexionController {
 		else {
 			System.out.println("La connexion a échoué");
 			return "connexion";
-		}
-		
+		}	
+	}
+	
+	@RequestMapping(value="/deconnecter", method=RequestMethod.GET)
+	public String deconnexion (HttpSession session) {	
+		session.invalidate();
+	return "redirect:./home";
 	}
 	
 	

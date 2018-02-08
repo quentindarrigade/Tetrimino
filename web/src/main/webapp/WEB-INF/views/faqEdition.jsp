@@ -7,7 +7,7 @@
 <tiles:insertDefinition name="app.layout">
 	<tiles:putAttribute name="title" value="Ajout d'une question/réponse" />
 	<tiles:putAttribute name="content">
-	<p>MOCHE</p>
+	
  		<form:form method="POST" modelAttribute="faqAttribute">
 		
 			<div class="form-group">
@@ -31,7 +31,7 @@
 
 			<button type="submit" class="btn btn-danger">Ajouter</button>
 
-
+<img src="C:\Users\ajc\Desktop\Tetris\Tetrimino\mvc\src\main\webapp\WEB-INF\leaderboard.jpeg" style="text-align: right" class="homme"/>
 
 		</form:form> 
 	</tiles:putAttribute>
