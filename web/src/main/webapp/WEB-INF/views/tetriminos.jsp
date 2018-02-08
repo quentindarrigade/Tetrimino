@@ -50,7 +50,7 @@
 		</div>
 		<div class="row">
 		<div class="col-">
-		<a href="ajouter" class="btn btn-primary" >Ajouter Tetrimino </a>
+		<a href="taille" class="btn btn-primary" >Ajouter Tetrimino </a>
 		</div>
 		</div>
 		

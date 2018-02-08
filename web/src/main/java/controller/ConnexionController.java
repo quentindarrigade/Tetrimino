@@ -24,6 +24,8 @@ public class ConnexionController {
 	return "connexion";
 	}
 	
+	
+	
 	@RequestMapping(value="/connexion", method=RequestMethod.POST)
 	public String connecter(@RequestParam(value="login") String username, @RequestParam(value="password") String password, HttpSession session) {
 		ModelAdmin admin=iad.authAdmin(username,password);
@@ -38,4 +40,6 @@ public class ConnexionController {
 		}
 		
 	}
+	
+	
 }
