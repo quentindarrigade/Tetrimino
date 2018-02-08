@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dao.IFAQDAO;
+import model.ModelAdmin;
 import model.ModelFAQ;
 
 @Controller
 public class FaqController {
 
-	// @RequestMapping(value={"/home",
-	// "/home/{username}"},method=RequestMethod.GET)
-	// public String home(@PathVariable(value="username", required=false) String
-	// username, @RequestParam(value="idProduit",defaultValue="12") int
-	// idProduit, Model model) {
-	// model.addAttribute("utilisateur", username);
-	// model.addAttribute("idProduit", idProduit);
-	// return "home";
-	// }
 
 	@Autowired
 	private IFAQDAO daoFaq;
@@ -43,33 +36,19 @@ public class FaqController {
 		return "faqEdition";
 	}
 
-/*	@PostMapping("/ajouter")
-	public String ajouter(@ModelAttribute("faq") ModelFAQ faq, Model model) {
-		System.out.println("test");
-		System.out.println(faq);
-		
-		//daoFaq.save(faq);
-		return "redirect:./faq";
-	}*/
+
 	
 	@PostMapping("/ajouter")
 	public String ajouter(@Valid @ModelAttribute("faqAttribute") ModelFAQ faq, BindingResult result,
-			Model model) {
+			Model model, HttpSession session) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 			return "faqEdition";
 		}
-		daoFaq.save(faq);
-		return "redirect:./faq";
+			return "redirect:./faq";
 	}
 
-	/*
-	 * @PostMapping("/ajouter") public String
-	 * ajouter(@Valid @ModelAttribute("listeFaq") ModelFAQ faq,BindingResult
-	 * result, Model model) { if(result.hasErrors()) {
-	 * //model.addAttribute("fournisseurs", daoFournisseur.findAll()); return
-	 * "faqEdition"; } daoFaq.save(faq); return "redirect:./faq"; }
-	 */
+
 
 	@GetMapping("/editer")
 	public String editer(@RequestParam("id") int id, Model model) {
@@ -82,7 +61,6 @@ public class FaqController {
 			Model model) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
-			//model.addAttribute("faq", daoFaq.findAll());
 			return "faqEdition";
 		}
 		daoFaq.save(faq);

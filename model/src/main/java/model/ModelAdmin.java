@@ -15,6 +15,8 @@ public class ModelAdmin extends ModelUtilisateur {
 	@OneToMany(mappedBy = "admin")
 	private List<ModelTetrimino> tetrimino;
 
+	
+
 	@OneToMany(mappedBy = "admin")
 	private List<ModelFAQ> faq;
 
@@ -38,5 +40,10 @@ public class ModelAdmin extends ModelUtilisateur {
 		this.faq = faq;
 	}
 	
-
+	@Override
+	public String toString() {
+		
+		
+		return super.toString() ;
+	}
 }

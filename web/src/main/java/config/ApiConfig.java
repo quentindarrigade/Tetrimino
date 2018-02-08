@@ -15,10 +15,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 @Configuration
-@ComponentScan({"controller"})
+@ComponentScan({"restController"})
 @EnableTransactionManagement
 @EnableWebMvc
-@Transactional
 public class ApiConfig implements WebMvcConfigurer{
 	public MappingJackson2HttpMessageConverter jsonConverter() {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();

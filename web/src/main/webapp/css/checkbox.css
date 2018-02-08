@@ -1,0 +1,17 @@
+.check {
+	height:50px;
+	width:50px;
+	border-style: solid;
+	background-color:white;
+	margin-right:-7px;
+	margin-bottom:-12px;
+}
+
+input[type="checkbox"]:checked + .check {
+	background-color:red;
+}
+
+.ligne{
+	margin-bottom:-17px;	
+}
+

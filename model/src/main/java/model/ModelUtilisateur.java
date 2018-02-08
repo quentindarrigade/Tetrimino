@@ -22,6 +22,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class ModelUtilisateur implements Serializable  {
 
+	@Override
+	public String toString() {
+		return "ModelUtilisateur [id=" + id + ", login=" + login + ", password=" + password + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UTI_ID")
