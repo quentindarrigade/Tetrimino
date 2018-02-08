@@ -36,7 +36,7 @@ public class ModelPartie implements Serializable {
 	private ModelJoueur joueur;
 	
 	@Column(name="SCORE")
-	private double score;
+	private Double score;
 	
 
 	public double getScore() {

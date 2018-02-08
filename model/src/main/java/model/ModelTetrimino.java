@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +46,7 @@ public class ModelTetrimino implements Serializable {
 	@JoinColumn(name = "TETRI_ADMIN_ID")
 	private ModelAdmin admin;
 
-	@OneToMany(mappedBy = "piece")
+	@OneToMany(mappedBy = "piece", cascade=CascadeType.REMOVE)
 	private List<ModelCoup> coups;
 
 	public ModelTetrimino(String Tetrimino00) {

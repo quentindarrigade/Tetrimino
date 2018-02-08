@@ -16,3 +16,5 @@ dao/\.settings/
 model/\.settings/
 test/\.settings/
 web/\.settings/
+
+web/target/m2e-wtp/web-resources/META-INF/maven/fr\.formation\.tetris/web/pom\.properties

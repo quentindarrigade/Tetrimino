@@ -1,0 +1,10 @@
+.check {
+	height:20px;
+	width:20px;
+	border-style: solid;
+	background-color:white;
+}
+
+input[type="checkbox"]:checked + .check {
+	background-color:red;
+}
